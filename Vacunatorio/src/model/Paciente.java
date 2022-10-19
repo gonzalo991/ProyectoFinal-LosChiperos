@@ -4,7 +4,7 @@ package model;
 import java.util.Date;
 
 
-public class Pacientes {
+public class Paciente {
     
     private int id;
     private String nombre;
