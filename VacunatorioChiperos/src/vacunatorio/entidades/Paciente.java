@@ -5,6 +5,8 @@ import java.util.Date;
 /*
 Aquí definimos la clase paciente con los atributos del mismo
  */
+
+
 public class Paciente {
 
     private String nombre;
@@ -30,6 +32,70 @@ public class Paciente {
         this.fechaDeNac = fechaDeNac;
         this.ctroSaludo = ctroSaludo;
         this.lote = lote;
+        this.nombreVacuna = nombreVacuna;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
+
+    public Cita getCita() {
+        return cita;
+    }
+
+    public void setCita(Cita cita) {
+        this.cita = cita;
+    }
+
+    public Date getFechaDeNac() {
+        return fechaDeNac;
+    }
+
+    public void setFechaDeNac(Date fechaDeNac) {
+        this.fechaDeNac = fechaDeNac;
+    }
+
+    public String getCtroSaludo() {
+        return ctroSaludo;
+    }
+
+    public void setCtroSaludo(String ctroSaludo) {
+        this.ctroSaludo = ctroSaludo;
+    }
+
+    public String getLote() {
+        return lote;
+    }
+
+    public void setLote(String lote) {
+        this.lote = lote;
+    }
+
+    public String getNombreVacuna() {
+        return nombreVacuna;
+    }
+
+    public void setNombreVacuna(String nombreVacuna) {
         this.nombreVacuna = nombreVacuna;
     }
 
