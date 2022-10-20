@@ -36,6 +36,8 @@ public class ControllerUser {
              if (user.equals(usuario.getUser())) {
                  lo.dispose();
                  Principal p = new Principal();
+                 p.setSize(1280, 720);
+                 p.setLocationRelativeTo(null);
                  p.setVisible(true);
              }else{
                  System.out.println("error login");

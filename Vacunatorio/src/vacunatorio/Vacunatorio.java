@@ -32,11 +32,12 @@ public class Vacunatorio {
      */
     public static void main(String[] args) throws SQLException, ParseException {
         login lg = new login();
+        lg.setLocationRelativeTo(null);
         lg.show();
         
         //List<Pacientes> LP = AllPacientes();
         //LP.forEach((n) -> System.out.println(n.getNombre()));
-     /*   
+         /* 
          Pacientes LPe = PacientesByDNI("29111111");
          System.out.println(LPe.getApellido()+" " 
                  +LPe.getNombre()+" " +LPe.getDni()
@@ -45,7 +46,7 @@ public class Vacunatorio {
        LPe.setFecha_nacimiento(new SimpleDateFormat("yyyy-MM-dd").parse("1989-02-26"));
        // LPe.setFecha_nacimiento(new GregorianCalendar(2014, Calendar.FEBRUARY, 11).getTime());
        // System.out.println(LPe.getApellido()+" " +LPe.getNombre()+" " +LPe.getDni());
-        
+      
         PacienteUpdate(LPe);
         Pacientes LPe2 = PacientesByDNI("29111111");
         System.out.println(LPe2.getApellido()+" " 

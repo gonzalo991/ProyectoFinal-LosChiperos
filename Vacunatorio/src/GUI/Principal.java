@@ -5,17 +5,30 @@
  */
 package GUI;
 
+import GUI.SubFrame.AllPacientes;
+import java.awt.BorderLayout;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JPanel;
+
+
+
 /**
  *
  * @author Cristian
  */
 public class Principal extends javax.swing.JFrame {
+    
 
     /**
      * Creates new form Principal
      */
     public Principal() {
         initComponents();
+        PanelContenedor.setLocation(0, 0);
+        
     }
 
     /**
@@ -27,38 +40,158 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        PanelContenedor = new javax.swing.JPanel();
+        menu = new javax.swing.JMenuBar();
+        btnPacientes = new javax.swing.JMenu();
+        viewPacientes = new javax.swing.JMenuItem();
+        findPaciente = new javax.swing.JMenuItem();
+        Turnos = new javax.swing.JMenu();
+        citaByDate = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        Aplicaciones = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
+        setSize(new java.awt.Dimension(1280, 720));
 
-        jLabel1.setText("Bienvenido");
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        PanelContenedor.setBackground(new java.awt.Color(255, 255, 255));
+        PanelContenedor.setPreferredSize(new java.awt.Dimension(1200, 600));
+
+        javax.swing.GroupLayout PanelContenedorLayout = new javax.swing.GroupLayout(PanelContenedor);
+        PanelContenedor.setLayout(PanelContenedorLayout);
+        PanelContenedorLayout.setHorizontalGroup(
+            PanelContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1200, Short.MAX_VALUE)
+        );
+        PanelContenedorLayout.setVerticalGroup(
+            PanelContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 600, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(PanelContenedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(664, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(52, Short.MAX_VALUE)
+                .addComponent(PanelContenedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        menu.setBackground(new java.awt.Color(255, 255, 255));
+        menu.setBorder(null);
+        menu.setForeground(new java.awt.Color(0, 0, 0));
+
+        btnPacientes.setText("Pacientes");
+
+        viewPacientes.setText("Ver Pacientes");
+        viewPacientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                viewPacientesMouseClicked(evt);
+            }
+        });
+        viewPacientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewPacientesActionPerformed(evt);
+            }
+        });
+        btnPacientes.add(viewPacientes);
+
+        findPaciente.setText("Buscar Paciente");
+        btnPacientes.add(findPaciente);
+
+        menu.add(btnPacientes);
+
+        Turnos.setText("Turnos");
+
+        citaByDate.setText("Turnos del día");
+        Turnos.add(citaByDate);
+
+        jMenuItem2.setText("Turno del Paciente");
+        Turnos.add(jMenuItem2);
+
+        menu.add(Turnos);
+
+        Aplicaciones.setText("Aplicaciones");
+
+        jMenuItem1.setText("Registar Aplicacion");
+        Aplicaciones.add(jMenuItem1);
+
+        menu.add(Aplicaciones);
+
+        setJMenuBar(menu);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(135, 135, 135)
-                .addComponent(jLabel1)
-                .addContainerGap(204, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 12, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(56, 56, 56)
-                .addComponent(jLabel1)
-                .addContainerGap(228, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void viewPacientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewPacientesMouseClicked
+        
+    }//GEN-LAST:event_viewPacientesMouseClicked
+
+    private void viewPacientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewPacientesActionPerformed
+        System.out.println("AllPacientes");
+        AllPacientes p = null;
+        try {
+            p = new AllPacientes();
+        } catch (SQLException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ShowPanel(p);
+    }//GEN-LAST:event_viewPacientesActionPerformed
+    
+    private void ShowPanel(JPanel p){
+        p.setSize(1200,600);
+        p.setLocation(0,0);
+        
+        PanelContenedor.removeAll();
+        PanelContenedor.add(p,BorderLayout.CENTER);
+        PanelContenedor.revalidate();
+        PanelContenedor.repaint();
+                
+        
+    }
     /**
      * @param args the command line arguments
      */
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenu Aplicaciones;
+    private javax.swing.JPanel PanelContenedor;
+    private javax.swing.JMenu Turnos;
+    private javax.swing.JMenu btnPacientes;
+    private javax.swing.JMenuItem citaByDate;
+    private javax.swing.JMenuItem findPaciente;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JMenuBar menu;
+    private javax.swing.JMenuItem viewPacientes;
     // End of variables declaration//GEN-END:variables
 }
