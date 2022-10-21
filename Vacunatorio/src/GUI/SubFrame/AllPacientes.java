@@ -6,30 +6,31 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.RootPaneContainer;
 import javax.swing.table.DefaultTableModel;
 import model.Paciente;
 
 public class AllPacientes extends javax.swing.JPanel {
-    DefaultTableModel dtmPacientes = new DefaultTableModel();
-    List<Paciente> LP = new ArrayList<Paciente>();
+    DefaultTableModel tablaDePacientes = new DefaultTableModel();
+    List<Paciente> listarPacientes = new ArrayList<Paciente>();
+    
     public AllPacientes() throws SQLException, ParseException {
         initComponents();
         setModelo();
         LlenarLista();
     }
+    
     private void setModelo(){
      String[] cabecera = {"N°","Id","Nombre","Apellido","DNI","Fecha de nacimiento"};
-     dtmPacientes.setColumnIdentifiers(cabecera);
-     TablaPacientes.setModel(dtmPacientes);
+     tablaDePacientes.setColumnIdentifiers(cabecera);
+     TablaPacientes.setModel(tablaDePacientes);
     }
     
     private void LlenarLista() throws SQLException, ParseException{
-        Object[] Registro = new Object[dtmPacientes.getColumnCount()];
+        Object[] Registro = new Object[tablaDePacientes.getColumnCount()];
 
-            LP = AllPacientes();
+            listarPacientes = AllPacientes();
             int i = 1;
-            for (Paciente p : LP) {
+            for (Paciente p : listarPacientes) {
                 Registro[0] = i;
                 Registro[1] = p.getId();
                 Registro[2] = p.getNombre();
@@ -38,9 +39,9 @@ public class AllPacientes extends javax.swing.JPanel {
                 Registro[5] = p.getFecha_nacimiento().toString();
                 
                 i++;
-                dtmPacientes.addRow(Registro);
+                tablaDePacientes.addRow(Registro);
             }
-              TablaPacientes.setModel(dtmPacientes);      
+              TablaPacientes.setModel(tablaDePacientes);      
                     
             
             
@@ -92,7 +93,7 @@ public class AllPacientes extends javax.swing.JPanel {
                     .addComponent(btnNewPaciente))
                 .addGap(67, 67, 67)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 820, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(166, Short.MAX_VALUE))
+                .addContainerGap(188, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -102,17 +103,18 @@ public class AllPacientes extends javax.swing.JPanel {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(66, 66, 66)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnNewPaciente)))
-                .addContainerGap(165, Short.MAX_VALUE))
+                .addContainerGap(168, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNewPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewPacienteActionPerformed
-        NewPaciente Nuevo;
-        Nuevo = new NewPaciente();
+        
+        NewPaciente Nuevo = new NewPaciente();
         Nuevo.setLocationRelativeTo(null);
         Nuevo.setVisible(true);
+        
     }//GEN-LAST:event_btnNewPacienteActionPerformed
     
 
