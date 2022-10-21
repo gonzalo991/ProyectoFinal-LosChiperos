@@ -15,7 +15,7 @@ import model.Aplicacion;
 
 public class ControllerAplicacion {
 
-    public static List<Aplicacion> AllCitas() throws SQLException, ParseException {
+    public static List<Aplicacion> AllAplicaciones() throws SQLException, ParseException {
 
         List<Aplicacion> ListA = new ArrayList<Aplicacion>();
         Statement stmt = null;
@@ -55,10 +55,10 @@ public class ControllerAplicacion {
         
         List<Aplicacion> ListA = new ArrayList<Aplicacion>();
 
-        String sql = "select a.id, a.fecha_ult_dosis, a.vacunatorio, a.lote_vacuna, a.marca_vacuna, a.num_dosis, a.id_paciente  from"
-                + "pacientes as p"
-                + "inner join aplicaciones as a on p.id = a.id_paciente"
-                + "where p.dni = ?";
+        String sql = "select a.id, a.fecha_ult_dosis, a.vacunatorio, a.lote_vacuna, a.marca_vacuna, a.num_dosis, a.id_paciente " 
+                    + "from pacientes as p "
+                    + "inner join aplicaciones as a on p.id = a.id_paciente "
+                    + "where p.dni = ?";
 
         try {
             Connection conn;
@@ -71,7 +71,7 @@ public class ControllerAplicacion {
             while (rs.next()) {
                 Aplicacion a = new Aplicacion();
                 a.setId(rs.getInt("id"));
-                a.setFecha_ult_dosis(new SimpleDateFormat("yyyy-MM-dd").parse(rs.getString("fecha_cita")));// debo convertir dado que parece que en sqlite la celda date son text
+                a.setFecha_ult_dosis(new SimpleDateFormat("yyyy-MM-dd").parse(rs.getString("fecha_ult_dosis")));// debo convertir dado que parece que en sqlite la celda date son text
                 a.setVacunatorio(rs.getString("vacunatorio"));
                 a.setLote_vacuna(rs.getString("lote_vacuna"));
                 a.setMarca_vacuna(rs.getString("marca_vacuna"));

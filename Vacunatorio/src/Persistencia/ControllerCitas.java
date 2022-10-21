@@ -75,8 +75,8 @@ public class ControllerCitas {
 
         //Declaro la consulta mysql
         String sql = "select c.id, c.dosis, c.fecha_cita, c.vacunatorio, c.id_paciente from "
-                + "pacientes as p"
-                + "inner join cita as c on p.id = c.id_paciente"
+                + "pacientes as p "
+                + "inner join cita as c on p.id = c.id_paciente "
                 + "where p.dni = ?";
 
         //Instancio la cita

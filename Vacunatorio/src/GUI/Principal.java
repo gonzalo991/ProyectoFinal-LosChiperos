@@ -6,6 +6,7 @@
 package GUI;
 
 import GUI.SubFrame.AllPacientes;
+import GUI.SubFrame.findPacientes;
 import java.awt.BorderLayout;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -109,6 +110,11 @@ public class Principal extends javax.swing.JFrame {
         btnPacientes.add(viewPacientes);
 
         findPaciente.setText("Buscar Paciente");
+        findPaciente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                findPacienteActionPerformed(evt);
+            }
+        });
         btnPacientes.add(findPaciente);
 
         menu.add(btnPacientes);
@@ -164,6 +170,14 @@ public class Principal extends javax.swing.JFrame {
         }
         ShowPanel(p);
     }//GEN-LAST:event_viewPacientesActionPerformed
+
+    private void findPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_findPacienteActionPerformed
+        
+         findPacientes f = null;
+         f = new findPacientes();
+        
+        ShowPanel(f);
+    }//GEN-LAST:event_findPacienteActionPerformed
     
     private void ShowPanel(JPanel p){
         p.setSize(1200,600);

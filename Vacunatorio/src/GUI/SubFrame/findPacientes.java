@@ -5,17 +5,41 @@
  */
 package GUI.SubFrame;
 
+import static Persistencia.ControllerAplicacion.AplicacionByDNI;
+import static Persistencia.ControllerCitas.getCitaByDNI;
+import static Persistencia.ControllerPacientes.PacientesByDNI;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+import model.Aplicacion;
+import model.Cita;
+import model.Paciente;
+
 /**
  *
  * @author Cristian
  */
 public class findPacientes extends javax.swing.JPanel {
-
+    DefaultTableModel tablaDosisModel = new DefaultTableModel();
     /**
      * Creates new form findPcientes
      */
     public findPacientes() {
         initComponents();
+        ComponentesNovisibles();
+        
+    }
+    private void ComponentesNovisibles(){
+        labelNoPaciente.setVisible(false);
+        labelNoTurno.setVisible(false);
+        panelDataPaciente.setVisible(false);
+        panelDosisTurno.setVisible(false);
+        panelCita.setVisible(false);
+        
     }
 
     /**
@@ -27,19 +51,462 @@ public class findPacientes extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        textDNI = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        btnBuscar = new javax.swing.JButton();
+        panelDataPaciente = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        labelName = new javax.swing.JLabel();
+        labelApellido = new javax.swing.JLabel();
+        labelDNI = new javax.swing.JLabel();
+        labelFecha = new javax.swing.JLabel();
+        labelNoPaciente = new javax.swing.JLabel();
+        panelDosisTurno = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaDosis = new javax.swing.JTable();
+        jLabel8 = new javax.swing.JLabel();
+        panelCita = new javax.swing.JPanel();
+        labelVacunatorio = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        labelDosis = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        labelFecha_cita = new javax.swing.JLabel();
+        labelNoTurno = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setText("Buscar Pacientes");
+
+        textDNI.setText("12456789");
+
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setText("DNI");
+
+        btnBuscar.setBackground(new java.awt.Color(255, 255, 255));
+        btnBuscar.setForeground(new java.awt.Color(0, 0, 0));
+        btnBuscar.setText("Buscar");
+        btnBuscar.setBorder(null);
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+
+        panelDataPaciente.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel3.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel3.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel3.setText("Nombre :");
+
+        jLabel4.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel4.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel4.setText("Apellido :");
+
+        jLabel5.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel5.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel5.setText("DNI :");
+
+        jLabel6.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel6.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel6.setText("Fecha de nacimiento :");
+
+        labelName.setBackground(new java.awt.Color(255, 255, 255));
+        labelName.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        labelName.setForeground(new java.awt.Color(0, 0, 0));
+        labelName.setText("Nombre :");
+
+        labelApellido.setBackground(new java.awt.Color(255, 255, 255));
+        labelApellido.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        labelApellido.setForeground(new java.awt.Color(0, 0, 0));
+        labelApellido.setText("Nombre :");
+
+        labelDNI.setBackground(new java.awt.Color(255, 255, 255));
+        labelDNI.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        labelDNI.setForeground(new java.awt.Color(0, 0, 0));
+        labelDNI.setText("Nombre :");
+
+        labelFecha.setBackground(new java.awt.Color(255, 255, 255));
+        labelFecha.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        labelFecha.setForeground(new java.awt.Color(0, 0, 0));
+        labelFecha.setText("Nombre :");
+
+        javax.swing.GroupLayout panelDataPacienteLayout = new javax.swing.GroupLayout(panelDataPaciente);
+        panelDataPaciente.setLayout(panelDataPacienteLayout);
+        panelDataPacienteLayout.setHorizontalGroup(
+            panelDataPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDataPacienteLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelDataPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelDataPacienteLayout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(labelName))
+                    .addGroup(panelDataPacienteLayout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(labelApellido))
+                    .addGroup(panelDataPacienteLayout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(labelDNI))
+                    .addGroup(panelDataPacienteLayout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(labelFecha)))
+                .addContainerGap(129, Short.MAX_VALUE))
+        );
+        panelDataPacienteLayout.setVerticalGroup(
+            panelDataPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDataPacienteLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(panelDataPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(labelName))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelDataPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(labelApellido))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelDataPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(labelDNI))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelDataPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(labelFecha))
+                .addContainerGap(56, Short.MAX_VALUE))
+        );
+
+        labelNoPaciente.setForeground(new java.awt.Color(204, 0, 0));
+        labelNoPaciente.setText("No se encontró Paciente con ese DNI");
+
+        panelDosisTurno.setBackground(new java.awt.Color(255, 255, 255));
+
+        tablaDosis.setBackground(new java.awt.Color(255, 255, 255));
+        tablaDosis.setForeground(new java.awt.Color(0, 0, 0));
+        tablaDosis.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        tablaDosis.setGridColor(new java.awt.Color(255, 255, 255));
+        tablaDosis.setShowHorizontalLines(true);
+        jScrollPane1.setViewportView(tablaDosis);
+
+        jLabel8.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel8.setText("Dosis aplicadas");
+
+        javax.swing.GroupLayout panelDosisTurnoLayout = new javax.swing.GroupLayout(panelDosisTurno);
+        panelDosisTurno.setLayout(panelDosisTurnoLayout);
+        panelDosisTurnoLayout.setHorizontalGroup(
+            panelDosisTurnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDosisTurnoLayout.createSequentialGroup()
+                .addGap(79, 79, 79)
+                .addGroup(panelDosisTurnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(79, Short.MAX_VALUE))
+        );
+        panelDosisTurnoLayout.setVerticalGroup(
+            panelDosisTurnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDosisTurnoLayout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addComponent(jLabel8)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(32, Short.MAX_VALUE))
+        );
+
+        panelCita.setBackground(new java.awt.Color(255, 255, 255));
+
+        labelVacunatorio.setForeground(new java.awt.Color(0, 0, 0));
+        labelVacunatorio.setText("El día:");
+
+        jLabel12.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel12.setText("Presentarse en :");
+
+        jLabel11.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel11.setText("Proxima Aplicacíon :");
+
+        labelDosis.setForeground(new java.awt.Color(0, 0, 0));
+        labelDosis.setText("El día:");
+
+        jLabel10.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel10.setText("El día:");
+
+        labelFecha_cita.setForeground(new java.awt.Color(0, 0, 0));
+        labelFecha_cita.setText("El día:");
+
+        labelNoTurno.setForeground(new java.awt.Color(204, 0, 0));
+        labelNoTurno.setText("No tiene un turno asignado");
+
+        jLabel9.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel9.setText("Proximo Turno");
+
+        javax.swing.GroupLayout panelCitaLayout = new javax.swing.GroupLayout(panelCita);
+        panelCita.setLayout(panelCitaLayout);
+        panelCitaLayout.setHorizontalGroup(
+            panelCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelCitaLayout.createSequentialGroup()
+                .addGap(54, 54, 54)
+                .addGroup(panelCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelNoTurno)
+                    .addComponent(jLabel9)
+                    .addGroup(panelCitaLayout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(labelDosis))
+                    .addGroup(panelCitaLayout.createSequentialGroup()
+                        .addComponent(jLabel12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(labelVacunatorio))
+                    .addGroup(panelCitaLayout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(labelFecha_cita)))
+                .addContainerGap(118, Short.MAX_VALUE))
+        );
+        panelCitaLayout.setVerticalGroup(
+            panelCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelCitaLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(labelNoTurno)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(labelFecha_cita))
+                .addGap(4, 4, 4)
+                .addGroup(panelCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(labelDosis))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(labelVacunatorio))
+                .addContainerGap(38, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(117, 117, 117)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelDataPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(29, 29, 29)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelNoPaciente)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(textDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(panelDosisTurno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(791, 791, 791))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(109, 109, 109)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(367, 367, 367)
+                        .addComponent(panelCita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(52, 52, 52)
+                .addComponent(jLabel1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(textDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)
+                            .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(labelNoPaciente)
+                        .addGap(7, 7, 7)
+                        .addComponent(panelDataPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(panelDosisTurno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(panelCita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(68, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        
+        String DNI = textDNI.getText();
+        Paciente p = null;
+        try {
+            p = PacientesByDNI(DNI);
+        } catch (SQLException ex) {
+            Logger.getLogger(findPacientes.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(findPacientes.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        if (p.getNombre() != null) {
+           llenarPanelPaciente(p);
+           findDosis(p);
+            try {
+                findCitas(p);
+            } catch (SQLException ex) {
+                Logger.getLogger(findPacientes.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ParseException ex) {
+                Logger.getLogger(findPacientes.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else{
+            labelNoPaciente.setVisible(true);
+            panelDataPaciente.setVisible(false);
+            
+        }
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
+    private void llenarPanelPaciente(Paciente p){
+            labelNoPaciente.setVisible(false);
+            panelDataPaciente.setVisible(true);
+            labelName.setText(p.getNombre());
+            labelApellido.setText(p.getApellido());
+            labelDNI.setText(p.getDni());
+            labelFecha.setText(p.getFecha_nacimiento().toString());
+    }
+    
+    private void findDosis(Paciente p){
+        List<Aplicacion> ListA = new ArrayList<Aplicacion>();
+        
+        try {
+            ListA = AplicacionByDNI(p.getDni());
+        } catch (Exception e) {
+        }
+        if (ListA.size() > 0) {
+            llenarListaDosis(ListA);
+            panelDosisTurno.setVisible(true);
+        }
+        
+    }
+    
+    private void setModelo(){
+     String[] cabecera = {"N°","Id","Fecha de aplicación","Lote Vacuna","Marca Vacuna","N° Dosis"};
+     tablaDosisModel.setColumnIdentifiers(cabecera);
+     tablaDosis.setModel(tablaDosisModel);
+    }
+    private void llenarListaDosis(List<Aplicacion> ListA){
+        setModelo();
+         Object[] Registro = new Object[tablaDosisModel.getColumnCount()];
+         int i = 0;
+         for (Aplicacion a : ListA) {
+             Registro[0] = i;
+             Registro[1] = a.getId();
+             Registro[2] = a.getFecha_ult_dosis().toString();
+             Registro[3] = a.getLote_vacuna();
+             Registro[4] = a.getMarca_vacuna();
+             Registro[5] = a.getNumeroDosis();
+             i++;
+             tablaDosisModel.addRow(Registro);
+        }
+          tablaDosis.setModel(tablaDosisModel);
+    }
+    
+  
+    
+    private void findCitas(Paciente p) throws SQLException, ParseException{
+        Cita c = null;
+        try {
+            c = getCitaByDNI(p.getDni());
+        } catch (Exception e) {
+        }
+        
+        if (c.getFecha_cita() !=  null) {
+            llenarPanelDosis(c);
+        }else{
+            System.out.println("no cita");
+        }
+        
+        
+    }
+    
+    private void llenarPanelDosis(Cita c){
+        panelCita.setVisible(true);
+        labelFecha_cita.setText(c.getFecha_cita().toString()); 
+        labelDosis.setText(c.getDosis() + " dosis");
+        labelVacunatorio.setText(c.getVacunatorio());
+        
+    }
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel labelApellido;
+    private javax.swing.JLabel labelDNI;
+    private javax.swing.JLabel labelDosis;
+    private javax.swing.JLabel labelFecha;
+    private javax.swing.JLabel labelFecha_cita;
+    private javax.swing.JLabel labelName;
+    private javax.swing.JLabel labelNoPaciente;
+    private javax.swing.JLabel labelNoTurno;
+    private javax.swing.JLabel labelVacunatorio;
+    private javax.swing.JPanel panelCita;
+    private javax.swing.JPanel panelDataPaciente;
+    private javax.swing.JPanel panelDosisTurno;
+    private javax.swing.JTable tablaDosis;
+    private javax.swing.JTextField textDNI;
     // End of variables declaration//GEN-END:variables
 }

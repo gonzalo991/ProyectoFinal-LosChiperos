@@ -20,7 +20,7 @@ public class AllPacientes extends javax.swing.JPanel {
     }
     
     private void setModelo(){
-     String[] cabecera = {"N°","Id","Nombre","Apellido","DNI","Fecha de nacimiento"};
+     String[] cabecera = {"N°","Id","Nombre","Vacunatorio","DNI","Fecha de nacimiento"};
      tablaDePacientes.setColumnIdentifiers(cabecera);
      TablaPacientes.setModel(tablaDePacientes);
     }
@@ -41,8 +41,7 @@ public class AllPacientes extends javax.swing.JPanel {
                 i++;
                 tablaDePacientes.addRow(Registro);
             }
-              TablaPacientes.setModel(tablaDePacientes);      
-                    
+              TablaPacientes.setModel(tablaDePacientes);                   
             
             
       
