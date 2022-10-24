@@ -330,6 +330,11 @@ public class findPacientes extends javax.swing.JPanel {
         });
 
         bntEdit.setText("Editar datos");
+        bntEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntEditActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -440,16 +445,21 @@ public class findPacientes extends javax.swing.JPanel {
             //borrar.setVisible(true);
             
             int input = JOptionPane.showConfirmDialog(null, 
-                    "¿Estas seguro de eliminar al Paciente "+p.getNombre()+" "+p.getApellido()+"?"
+                    "¿Estas seguro de eliminar al Paciente "+this.p.getNombre()+" "+this.p.getApellido()+"?"
                     , "Eliminar paciente",
 				JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
 	       if (input == 0) {
-            PacienteDelete(p.getDni());
+            PacienteDelete(this.p.getDni());
         }
 	
 	// 0=yes, 1=no, 2=cancel
 	System.out.println(input);
     }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void bntEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntEditActionPerformed
+      editPaciente modPaciente = new editPaciente(this.p);
+      modPaciente.setVisible(true);
+    }//GEN-LAST:event_bntEditActionPerformed
 
     private void llenarPanelPaciente(Paciente p){
             labelNoPaciente.setVisible(false);

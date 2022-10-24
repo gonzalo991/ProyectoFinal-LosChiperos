@@ -587,6 +587,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Editar datos"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bntEditActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
