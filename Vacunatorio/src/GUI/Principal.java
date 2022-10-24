@@ -7,6 +7,7 @@ package GUI;
 
 import GUI.SubFrame.AllPacientes;
 import GUI.SubFrame.findPacientes;
+
 import java.awt.BorderLayout;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -122,6 +123,11 @@ public class Principal extends javax.swing.JFrame {
         Turnos.setText("Turnos");
 
         citaByDate.setText("Turnos del día");
+        citaByDate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                citaByDateActionPerformed(evt);
+            }
+        });
         Turnos.add(citaByDate);
 
         jMenuItem2.setText("Turno del Paciente");
@@ -178,6 +184,11 @@ public class Principal extends javax.swing.JFrame {
         
         ShowPanel(f);
     }//GEN-LAST:event_findPacienteActionPerformed
+
+    private void citaByDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_citaByDateActionPerformed
+
+          
+    }//GEN-LAST:event_citaByDateActionPerformed
     
     private void ShowPanel(JPanel p){
         p.setSize(1200,600);
