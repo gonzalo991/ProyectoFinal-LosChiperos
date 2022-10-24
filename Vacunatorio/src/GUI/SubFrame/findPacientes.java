@@ -7,6 +7,7 @@ package GUI.SubFrame;
 
 import static Persistencia.ControllerAplicacion.AplicacionByDNI;
 import static Persistencia.ControllerCitas.getCitaByDNI;
+import static Persistencia.ControllerPacientes.PacienteDelete;
 import static Persistencia.ControllerPacientes.PacientesByDNI;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Aplicacion;
 import model.Cita;
@@ -434,8 +436,19 @@ public class findPacientes extends javax.swing.JPanel {
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-            DiaBorrarP borrar = new DiaBorrarP(p);
-            borrar.setVisible(true);
+            //DiaBorrarP borrar = new DiaBorrarP(p);
+            //borrar.setVisible(true);
+            
+            int input = JOptionPane.showConfirmDialog(null, 
+                    "¿Estas seguro de eliminar al Paciente "+p.getNombre()+" "+p.getApellido()+"?"
+                    , "Eliminar paciente",
+				JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
+	       if (input == 0) {
+            PacienteDelete(p.getDni());
+        }
+	
+	// 0=yes, 1=no, 2=cancel
+	System.out.println(input);
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void llenarPanelPaciente(Paciente p){
