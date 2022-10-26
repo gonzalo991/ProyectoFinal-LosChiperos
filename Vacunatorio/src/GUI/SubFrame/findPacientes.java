@@ -11,11 +11,17 @@ import static Persistencia.ControllerPacientes.PacienteDelete;
 import static Persistencia.ControllerPacientes.PacientesByDNI;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import model.Aplicacion;
 import model.Cita;
@@ -26,7 +32,14 @@ import model.Paciente;
  * @author Cristian
  */
 public class findPacientes extends javax.swing.JPanel {
-    DefaultTableModel tablaDosisModel = new DefaultTableModel();
+    DefaultTableModel tablaDosisModel = new DefaultTableModel(){
+    @Override
+    public boolean isCellEditable(int row, int column) {
+       //all cells false
+       return false;
+    }
+    
+    };
     
     
     public findPacientes() {
@@ -214,6 +227,11 @@ public class findPacientes extends javax.swing.JPanel {
         ));
         tablaDosis.setGridColor(new java.awt.Color(255, 255, 255));
         tablaDosis.setShowHorizontalLines(true);
+        tablaDosis.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaDosisMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tablaDosis);
 
         jLabel8.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
@@ -231,9 +249,11 @@ public class findPacientes extends javax.swing.JPanel {
                 .addGap(79, 79, 79)
                 .addGroup(panelDosisTurnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labelNoDosis)
-                    .addComponent(jLabel8)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(79, Short.MAX_VALUE))
+                    .addComponent(jLabel8))
+                .addContainerGap(276, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDosisTurnoLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 547, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         panelDosisTurnoLayout.setVerticalGroup(
             panelDosisTurnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -461,6 +481,28 @@ public class findPacientes extends javax.swing.JPanel {
       modPaciente.setVisible(true);
     }//GEN-LAST:event_bntEditActionPerformed
 
+    private void tablaDosisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaDosisMouseClicked
+        int column = tablaDosis.getColumnModel().getColumnIndexAtX(evt.getX());
+        int row = evt.getY()/tablaDosis.getRowHeight();
+        if(row < tablaDosis.getRowCount() && row >= 0 && column < tablaDosis.getColumnCount() && column >= 0){
+            Object value = tablaDosis.getValueAt(row, column);
+            if(value instanceof JButton){
+                ((JButton)value).doClick();
+                JButton boton = (JButton) value;
+
+                if(boton.getName().equals("m")){
+                    System.out.println(tablaDosis.getValueAt(row, column-5).toString());
+                    //EVENTOS MODIFICAR
+                }
+                if(boton.getName().equals("e")){
+                    JOptionPane.showConfirmDialog(null, "Desea eliminar este registro", "Confirmar", JOptionPane.OK_CANCEL_OPTION);
+                    System.out.println("Click en el boton eliminar");
+                    //EVENTOS ELIMINAR
+                }
+            }
+        }
+    }//GEN-LAST:event_tablaDosisMouseClicked
+
     private void llenarPanelPaciente(Paciente p){
             labelNoPaciente.setVisible(false);
             panelDataPaciente.setVisible(true);
@@ -478,7 +520,8 @@ public class findPacientes extends javax.swing.JPanel {
         } catch (Exception e) {
         }
         if (ListA.size() > 0) {
-            llenarListaDosis(ListA);
+            //llenarListaDosis(ListA);
+            ver_tabla(tablaDosis,ListA);
             panelDosisTurno.setVisible(true);
             labelNoDosis.setVisible(false);
                     
@@ -490,11 +533,15 @@ public class findPacientes extends javax.swing.JPanel {
     }
     
     private void setModelo(){
-     String[] cabecera = {"N°","Id","Fecha de aplicación","Lote Vacuna","Marca Vacuna","N° Dosis"};
+     String[] cabecera = {"N°","Id","Fecha de aplicación","Lote Vacuna","Marca Vacuna","N° Dosis"," "," "};
      tablaDosisModel.setColumnIdentifiers(cabecera);
+
      tablaDosis.setModel(tablaDosisModel);
     }
+   
+    
     private void llenarListaDosis(List<Aplicacion> ListA){
+        
         setModelo();
          Object[] Registro = new Object[tablaDosisModel.getColumnCount()];
          int i = 0;
@@ -505,13 +552,50 @@ public class findPacientes extends javax.swing.JPanel {
              Registro[3] = a.getLote_vacuna();
              Registro[4] = a.getMarca_vacuna();
              Registro[5] = a.getNumeroDosis();
+           
              i++;
              tablaDosisModel.addRow(Registro);
         }
+         
+                 
           tablaDosis.setModel(tablaDosisModel);
     }
     
+      
+    public void ver_tabla(JTable tabla,List<Aplicacion> ListA){
+        
+        tabla.setDefaultRenderer(Object.class, new Render());
+        
+        JButton btn1 = new JButton("Modificar");
+        btn1.setName("m");
+        JButton btn2 = new JButton("Eliminar");
+        btn2.setName("e");
+        //btn2.setIcon(defaultIcon);
+         setModelo();
+         Object[] Registro = new Object[tablaDosisModel.getColumnCount()];
+         int i = 0;
+         for (Aplicacion a : ListA) {
+             Registro[0] = i;
+             Registro[1] = a.getId();
+             Registro[2] = new SimpleDateFormat("yyyy-MM-dd", Locale.US).format(a.getFecha_ult_dosis());
+             Registro[3] = a.getLote_vacuna();
+             Registro[4] = a.getMarca_vacuna();
+             Registro[5] = a.getNumeroDosis();
+            Registro[6] = btn1;
+            Registro[7] = btn2;
+             i++;
+             tablaDosisModel.addRow(Registro);
+        }
+
+
+        tabla.setModel(tablaDosisModel);
+        
+        tabla.setPreferredScrollableViewportSize(tabla.getPreferredSize());
+        tabla.setRowHeight(30);
+       tabla.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
   
+
+    }
     
     private void findCitas(Paciente p) throws SQLException, ParseException{
         Cita c = null;

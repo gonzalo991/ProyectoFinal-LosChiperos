@@ -3,12 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Cristian/Proyectos_UTN/Java/z_ProyectoFinalJava2022/ProyectoFinal-LosChiperos/Vacunatorio/src/GUI/Principal.java</file>
-            <file>file:/C:/Users/Cristian/Proyectos_UTN/Java/z_ProyectoFinalJava2022/ProyectoFinal-LosChiperos/Vacunatorio/src/Persistencia/ControllerCitas.java</file>
+            <file>file:/C:/Users/Cristian/Proyectos_UTN/Java/z_ProyectoFinalJava2022/ProyectoFinal-LosChiperos/Vacunatorio/src/GUI/SubFrame/editPaciente.java</file>
             <file>file:/C:/Users/Cristian/Proyectos_UTN/Java/z_ProyectoFinalJava2022/ProyectoFinal-LosChiperos/Vacunatorio/src/GUI/SubFrame/findPacientes.java</file>
-            <file>file:/C:/Users/Cristian/Proyectos_UTN/Java/z_ProyectoFinalJava2022/ProyectoFinal-LosChiperos/Vacunatorio/src/model/Aplicacion.java</file>
-            <file>file:/C:/Users/Cristian/Proyectos_UTN/Java/z_ProyectoFinalJava2022/ProyectoFinal-LosChiperos/Vacunatorio/src/Persistencia/ControllerAplicacion.java</file>
-            <file>file:/C:/Users/Cristian/Proyectos_UTN/Java/z_ProyectoFinalJava2022/ProyectoFinal-LosChiperos/Vacunatorio/src/GUI/SubFrame/AllPacientes.java</file>
+            <file>file:/C:/Users/Cristian/Proyectos_UTN/Java/z_ProyectoFinalJava2022/ProyectoFinal-LosChiperos/Vacunatorio/src/vacunatorio/Vacunatorio.java</file>
+            <file>file:/C:/Users/Cristian/Proyectos_UTN/Java/z_ProyectoFinalJava2022/ProyectoFinal-LosChiperos/Vacunatorio/src/GUI/SubFrame/Render.java</file>
         </group>
     </open-files>
 </project-private>
