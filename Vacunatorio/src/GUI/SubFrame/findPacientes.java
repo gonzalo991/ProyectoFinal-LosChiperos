@@ -482,19 +482,20 @@ public class findPacientes extends javax.swing.JPanel {
     }//GEN-LAST:event_bntEditActionPerformed
 
     private void tablaDosisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaDosisMouseClicked
-        int column = tablaDosis.getColumnModel().getColumnIndexAtX(evt.getX());
-        int row = evt.getY()/tablaDosis.getRowHeight();
-        if(row < tablaDosis.getRowCount() && row >= 0 && column < tablaDosis.getColumnCount() && column >= 0){
-            Object value = tablaDosis.getValueAt(row, column);
-            if(value instanceof JButton){
+        int column = tablaDosis.getColumnModel().getColumnIndexAtX(evt.getX());// me dice en que columna hago click 
+        int row = evt.getY()/tablaDosis.getRowHeight();// me dice en que fila hago click 
+        if(row < tablaDosis.getRowCount() && row >= 0 && column < tablaDosis.getColumnCount() && column >= 0){ // me aseguro que los valores de filas y columnas tengan un valor logico
+            Object value = tablaDosis.getValueAt(row, column); // traigo el objeto según fila y columna
+            if(value instanceof JButton){ // me aseguro que el click sea en un botón 
                 ((JButton)value).doClick();
                 JButton boton = (JButton) value;
 
-                if(boton.getName().equals("m")){
+                if(boton.getName().equals("m")){ //si el botón es igual a modificar
+                    int idDosis = Integer.parseInt(tablaDosis.getValueAt(row, column-5).toString());// traigo el valor de la celda id de la fila 
                     System.out.println(tablaDosis.getValueAt(row, column-5).toString());
                     //EVENTOS MODIFICAR
                 }
-                if(boton.getName().equals("e")){
+                if(boton.getName().equals("e")){ // si el botón es igual a eliminar
                     JOptionPane.showConfirmDialog(null, "Desea eliminar este registro", "Confirmar", JOptionPane.OK_CANCEL_OPTION);
                     System.out.println("Click en el boton eliminar");
                     //EVENTOS ELIMINAR
@@ -502,7 +503,8 @@ public class findPacientes extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_tablaDosisMouseClicked
-
+    
+    
     private void llenarPanelPaciente(Paciente p){
             labelNoPaciente.setVisible(false);
             panelDataPaciente.setVisible(true);
