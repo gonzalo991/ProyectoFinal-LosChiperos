@@ -5,7 +5,8 @@
  */
 package GUI.SubFrame;
 
-import static Persistencia.ControllerPacientes.PacienteInsert;
+
+import static Persistencia.ControllerPacientes.PacienteUpdate;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -19,19 +20,29 @@ import model.Paciente;
  *
  * @author Cristian
  */
-public class NewPaciente extends javax.swing.JFrame {
+public class editDosis extends javax.swing.JFrame {
 
     /**
      * Creates new form NewPaciente
      */
-    public NewPaciente() {
+    Paciente paciente;
+    public editDosis(Paciente paciente) {
         initComponents();
-       dateLabel();
+        this.paciente = paciente;
+        setDataFormulario();
+       //dateLabel();
     }
     public void dateLabel(){
         String textDate_ = new SimpleDateFormat("yyyy-MM-dd", Locale.US).format(new Date());
         textFecha.setText(textDate_);
     }
+    private void setDataFormulario(){
+        textNombre.setText(this.paciente.getNombre());
+         textApellido.setText(this.paciente.getApellido());
+        textDNI.setText(this.paciente.getDni());
+        textFecha.setText( new SimpleDateFormat("yyyy-MM-dd", Locale.US).format(this.paciente.getFecha_nacimiento()));
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -47,7 +58,7 @@ public class NewPaciente extends javax.swing.JFrame {
         textApellido = new javax.swing.JTextField();
         textDNI = new javax.swing.JTextField();
         textFecha = new javax.swing.JTextField();
-        btnIngresar = new javax.swing.JButton();
+        btnModificar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -64,10 +75,10 @@ public class NewPaciente extends javax.swing.JFrame {
 
         textDNI.setText("DNI");
 
-        btnIngresar.setText("Ingresar");
-        btnIngresar.addActionListener(new java.awt.event.ActionListener() {
+        btnModificar.setText("Modificar");
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnIngresarActionPerformed(evt);
+                btnModificarActionPerformed(evt);
             }
         });
 
@@ -90,7 +101,7 @@ public class NewPaciente extends javax.swing.JFrame {
         jLabel5.setBackground(new java.awt.Color(255, 255, 255));
         jLabel5.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel5.setText("Nuevo Paciente");
+        jLabel5.setText("Editar Paciente");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -113,7 +124,7 @@ public class NewPaciente extends javax.swing.JFrame {
                                 .addGap(39, 39, 39)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnIngresar)
+                                .addComponent(btnModificar)
                                 .addGap(2, 2, 2))
                             .addComponent(textFecha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -144,7 +155,7 @@ public class NewPaciente extends javax.swing.JFrame {
                     .addComponent(textFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addGap(18, 18, 18)
-                .addComponent(btnIngresar)
+                .addComponent(btnModificar)
                 .addGap(33, 33, 33))
         );
 
@@ -162,30 +173,30 @@ public class NewPaciente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
-        Paciente p = new Paciente();
-        p.setApellido(textApellido.getText());
-        p.setNombre(textNombre.getText());
-        p.setDni(textDNI.getText());
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        
+        this.paciente.setApellido(textApellido.getText());
+        this.paciente.setNombre(textNombre.getText());
+        this.paciente.setDni(textDNI.getText());
         System.out.println(textFecha.getText());
         try {
-            p.setFecha_nacimiento(new SimpleDateFormat("yyyy-MM-dd").parse(textFecha.getText()));
+            this.paciente.setFecha_nacimiento(new SimpleDateFormat("yyyy-MM-dd").parse(textFecha.getText()));
         } catch (ParseException ex) {
-            Logger.getLogger(NewPaciente.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(editDosis.class.getName()).log(Level.SEVERE, null, ex);
         }
-        PacienteInsert(p);
+        PacienteUpdate(this.paciente);
         this.dispose();
     
-    }//GEN-LAST:event_btnIngresarActionPerformed
+    }//GEN-LAST:event_btnModificarActionPerformed
 
     
     /**
      * @param args the command line arguments
      */
-    
+  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnIngresar;
+    private javax.swing.JButton btnModificar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

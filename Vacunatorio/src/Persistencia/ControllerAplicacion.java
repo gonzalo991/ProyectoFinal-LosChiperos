@@ -91,6 +91,35 @@ public class ControllerAplicacion {
         return ListA;
     }
 
+    public static Aplicacion AplicacionByid(int id) throws SQLException, ParseException{
+        Aplicacion a = new Aplicacion();
+        String sql = "select * " 
+                    + "from aplicaciones "
+                    + "where id = ?";
+          try {
+            Connection conn;
+            conn = connect();
+            PreparedStatement prepared = conn.prepareStatement(sql);
+            prepared.setInt(1, id);
+            ResultSet rs;
+            rs = prepared.executeQuery();
+
+            while (rs.next()) {
+               a.setId(rs.getInt("id"));
+                a.setFecha_ult_dosis(new SimpleDateFormat("yyyy-MM-dd").parse(rs.getString("fecha_ult_dosis")));// debo convertir dado que parece que en sqlite la celda date son text
+                a.setVacunatorio(rs.getString("vacunatorio"));
+                a.setLote_vacuna(rs.getString("lote_vacuna"));
+                a.setMarca_vacuna(rs.getString("marca_vacuna"));
+                a.setNumeroDosis(rs.getInt("num_dosis"));
+                a.setId_paciente(rs.getInt("id_paciente"));
+            }
+            conn.close();
+            return a;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+          return a;
+    }
     public static void AplicacionDeleteById(int id) {
         String sql = "DELETE FROM aplicaciones where id = ?";
         try {
