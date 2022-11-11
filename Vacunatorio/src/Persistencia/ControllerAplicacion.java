@@ -120,6 +120,7 @@ public class ControllerAplicacion {
         }
           return a;
     }
+    
     public static void AplicacionDeleteById(int id) {
         String sql = "DELETE FROM aplicaciones where id = ?";
         try {

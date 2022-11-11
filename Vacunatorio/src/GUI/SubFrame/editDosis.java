@@ -6,6 +6,7 @@
 package GUI.SubFrame;
 
 
+import static Persistencia.ControllerAplicacion.AplicacionUpdate;
 import static Persistencia.ControllerPacientes.PacienteUpdate;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -13,7 +14,8 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.Paciente;
+import model.Aplicacion;
+
 
 
 /**
@@ -25,22 +27,24 @@ public class editDosis extends javax.swing.JFrame {
     /**
      * Creates new form NewPaciente
      */
-    Paciente paciente;
-    public editDosis(Paciente paciente) {
+    Aplicacion aplicacion;
+    
+    public editDosis(Aplicacion aplicacion) {
         initComponents();
-        this.paciente = paciente;
+        this.aplicacion = aplicacion;
         setDataFormulario();
        //dateLabel();
     }
     public void dateLabel(){
         String textDate_ = new SimpleDateFormat("yyyy-MM-dd", Locale.US).format(new Date());
-        textFecha.setText(textDate_);
+        textFechaDosis.setText(textDate_);
     }
     private void setDataFormulario(){
-        textNombre.setText(this.paciente.getNombre());
-         textApellido.setText(this.paciente.getApellido());
-        textDNI.setText(this.paciente.getDni());
-        textFecha.setText( new SimpleDateFormat("yyyy-MM-dd", Locale.US).format(this.paciente.getFecha_nacimiento()));
+        textFechaDosis.setText(new SimpleDateFormat("yyyy-MM-dd", Locale.US).format(this.aplicacion.getFecha_ult_dosis()));
+        textVacunatorio.setText(this.aplicacion.getVacunatorio());
+        textLoteVacuna.setText(this.aplicacion.getLote_vacuna());
+        textMarcaVacuna.setText( this.aplicacion.getMarca_vacuna());
+        textNumDosis.setText(Integer.toString(this.aplicacion.getNumeroDosis()));
     }
     
 
@@ -54,26 +58,26 @@ public class editDosis extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        textNombre = new javax.swing.JTextField();
-        textApellido = new javax.swing.JTextField();
-        textDNI = new javax.swing.JTextField();
-        textFecha = new javax.swing.JTextField();
+        textFechaDosis = new javax.swing.JTextField();
+        textVacunatorio = new javax.swing.JTextField();
+        textLoteVacuna = new javax.swing.JTextField();
+        textMarcaVacuna = new javax.swing.JTextField();
         btnModificar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        textNumDosis = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        textNombre.setText("Nombre");
+        textVacunatorio.setText("Apellido");
 
-        textApellido.setText("Apellido");
-
-        textDNI.setText("DNI");
+        textLoteVacuna.setText("DNI");
 
         btnModificar.setText("Modificar");
         btnModificar.addActionListener(new java.awt.event.ActionListener() {
@@ -84,53 +88,60 @@ public class editDosis extends javax.swing.JFrame {
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("Nombre");
+        jLabel1.setText("Fecha");
 
         jLabel2.setBackground(new java.awt.Color(0, 0, 0));
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("Apellido");
+        jLabel2.setText("Vacunatorio");
 
         jLabel3.setBackground(new java.awt.Color(0, 0, 0));
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel3.setText("DNI");
+        jLabel3.setText("Lote Vacuna");
 
         jLabel4.setBackground(new java.awt.Color(0, 0, 0));
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel4.setText("Fecha Nacimiento");
+        jLabel4.setText("Marca vacuna");
 
         jLabel5.setBackground(new java.awt.Color(255, 255, 255));
         jLabel5.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel5.setText("Editar Paciente");
+        jLabel5.setText("Editar Dosis");
+
+        jLabel6.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel6.setText("N° de Dosis");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(17, Short.MAX_VALUE)
+                .addContainerGap(28, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(94, 94, 94))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3))
-                                .addGap(39, 39, 39)))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnModificar)
-                                .addGap(2, 2, 2))
-                            .addComponent(textFecha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(textApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(textDNI, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(textNombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel6)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(textNumDosis, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel1)
+                                    .addGap(94, 94, 94))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel4)
+                                        .addComponent(jLabel2)
+                                        .addComponent(jLabel3))
+                                    .addGap(39, 39, 39)))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(textMarcaVacuna, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(textVacunatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(textLoteVacuna, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(textFechaDosis, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnModificar, javax.swing.GroupLayout.Alignment.TRAILING)))))
                 .addGap(131, 131, 131))
         );
         jPanel1Layout.setVerticalGroup(
@@ -138,26 +149,32 @@ public class editDosis extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textFechaDosis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textVacunatorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textLoteVacuna, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textMarcaVacuna, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(textNumDosis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addComponent(btnModificar)
-                .addGap(33, 33, 33))
+                .addContainerGap())
         );
+
+        jLabel5.getAccessibleContext().setAccessibleName("Editar D");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -174,17 +191,18 @@ public class editDosis extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-        
-        this.paciente.setApellido(textApellido.getText());
-        this.paciente.setNombre(textNombre.getText());
-        this.paciente.setDni(textDNI.getText());
-        System.out.println(textFecha.getText());
         try {
-            this.paciente.setFecha_nacimiento(new SimpleDateFormat("yyyy-MM-dd").parse(textFecha.getText()));
+            this.aplicacion.setFecha_ult_dosis(new SimpleDateFormat("yyyy-MM-dd").parse(textFechaDosis.getText()));
         } catch (ParseException ex) {
             Logger.getLogger(editDosis.class.getName()).log(Level.SEVERE, null, ex);
         }
-        PacienteUpdate(this.paciente);
+        this.aplicacion.setVacunatorio(textVacunatorio.getText());              
+        this.aplicacion.setLote_vacuna(textLoteVacuna.getText());
+        this.aplicacion.setMarca_vacuna(textMarcaVacuna.getText());
+        this.aplicacion.setNumeroDosis(Integer.parseInt(textNumDosis.getText()));
+        
+        
+        AplicacionUpdate(this.aplicacion);
         this.dispose();
     
     }//GEN-LAST:event_btnModificarActionPerformed
@@ -202,11 +220,13 @@ public class editDosis extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField textApellido;
-    private javax.swing.JTextField textDNI;
-    private javax.swing.JTextField textFecha;
-    private javax.swing.JTextField textNombre;
+    private javax.swing.JTextField textFechaDosis;
+    private javax.swing.JTextField textLoteVacuna;
+    private javax.swing.JTextField textMarcaVacuna;
+    private javax.swing.JTextField textNumDosis;
+    private javax.swing.JTextField textVacunatorio;
     // End of variables declaration//GEN-END:variables
 
  
