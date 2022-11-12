@@ -8,6 +8,7 @@ package GUI.SubFrame;
 import static Persistencia.ControllerAplicacion.AplicacionByDNI;
 import static Persistencia.ControllerAplicacion.AplicacionByid;
 import static Persistencia.ControllerAplicacion.AplicacionDeleteById;
+import static Persistencia.ControllerCitas.CitaDeleteByPaciente;
 import static Persistencia.ControllerCitas.getCitaByDNI;
 import static Persistencia.ControllerPacientes.PacienteDelete;
 import static Persistencia.ControllerPacientes.PacientesByDNI;
@@ -34,30 +35,30 @@ import model.Paciente;
  * @author Cristian
  */
 public class findPacientes extends javax.swing.JPanel {
-    DefaultTableModel tablaDosisModel = new DefaultTableModel(){
-    @Override
-    public boolean isCellEditable(int row, int column) {
+    Paciente p = null;
+    Cita c = null;    
+    DefaultTableModel tablaDosisModel = new DefaultTableModel(){    
+        @Override
+        public boolean isCellEditable(int row, int column) {
        //all cells false
        return false;
-    }
+    }    
+  };
     
-    };
     
-    
-    public findPacientes() {
+    public findPacientes() {//constructor
         initComponents();
-        ComponentesNovisibles();
-        
+        ComponentesNovisibles();        
     }
-    private void ComponentesNovisibles(){
+    
+    private void ComponentesNovisibles(){//Inicializo paneles como no visibles - luego se habilitan si existen los datos
         labelNoPaciente.setVisible(false);
         labelNoTurno.setVisible(false);
         panelDataPaciente.setVisible(false);
         panelDosisTurno.setVisible(false);
-        panelCita.setVisible(false);
-        
+        panelCita.setVisible(false);        
     }
-    Paciente p = null;
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -77,6 +78,8 @@ public class findPacientes extends javax.swing.JPanel {
         labelApellido = new javax.swing.JLabel();
         labelDNI = new javax.swing.JLabel();
         labelFecha = new javax.swing.JLabel();
+        btnDelete = new javax.swing.JButton();
+        bntEdit = new javax.swing.JButton();
         labelNoPaciente = new javax.swing.JLabel();
         panelDosisTurno = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -92,8 +95,8 @@ public class findPacientes extends javax.swing.JPanel {
         labelFecha_cita = new javax.swing.JLabel();
         labelNoTurno = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        btnDelete = new javax.swing.JButton();
-        bntEdit = new javax.swing.JButton();
+        btnDeleteTurno = new javax.swing.JButton();
+        bntEditTurno = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -158,6 +161,20 @@ public class findPacientes extends javax.swing.JPanel {
         labelFecha.setForeground(new java.awt.Color(0, 0, 0));
         labelFecha.setText("Nombre :");
 
+        btnDelete.setText("Eliminar Paciente");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+
+        bntEdit.setText("Editar datos");
+        bntEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntEditActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelDataPacienteLayout = new javax.swing.GroupLayout(panelDataPaciente);
         panelDataPaciente.setLayout(panelDataPacienteLayout);
         panelDataPacienteLayout.setHorizontalGroup(
@@ -182,6 +199,11 @@ public class findPacientes extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(labelFecha)))
                 .addContainerGap(129, Short.MAX_VALUE))
+            .addGroup(panelDataPacienteLayout.createSequentialGroup()
+                .addComponent(btnDelete)
+                .addGap(18, 18, 18)
+                .addComponent(bntEdit)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         panelDataPacienteLayout.setVerticalGroup(
             panelDataPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -202,7 +224,10 @@ public class findPacientes extends javax.swing.JPanel {
                 .addGroup(panelDataPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(labelFecha))
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addGroup(panelDataPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnDelete)
+                    .addComponent(bntEdit)))
         );
 
         labelNoPaciente.setForeground(new java.awt.Color(204, 0, 0));
@@ -295,6 +320,20 @@ public class findPacientes extends javax.swing.JPanel {
         jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("Proximo Turno");
 
+        btnDeleteTurno.setText("Eliminar Turno");
+        btnDeleteTurno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteTurnoActionPerformed(evt);
+            }
+        });
+
+        bntEditTurno.setText("Editar Turno");
+        bntEditTurno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntEditTurnoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelCitaLayout = new javax.swing.GroupLayout(panelCita);
         panelCita.setLayout(panelCitaLayout);
         panelCitaLayout.setHorizontalGroup(
@@ -302,6 +341,10 @@ public class findPacientes extends javax.swing.JPanel {
             .addGroup(panelCitaLayout.createSequentialGroup()
                 .addGap(54, 54, 54)
                 .addGroup(panelCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelCitaLayout.createSequentialGroup()
+                        .addComponent(btnDeleteTurno)
+                        .addGap(18, 18, 18)
+                        .addComponent(bntEditTurno))
                     .addComponent(labelNoTurno)
                     .addComponent(jLabel9)
                     .addGroup(panelCitaLayout.createSequentialGroup()
@@ -316,7 +359,7 @@ public class findPacientes extends javax.swing.JPanel {
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(labelFecha_cita)))
-                .addContainerGap(118, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
         panelCitaLayout.setVerticalGroup(
             panelCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -337,32 +380,21 @@ public class findPacientes extends javax.swing.JPanel {
                 .addGroup(panelCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
                     .addComponent(labelVacunatorio))
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addGroup(panelCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnDeleteTurno)
+                    .addComponent(bntEditTurno))
+                .addContainerGap())
         );
-
-        btnDelete.setText("Eliminar Paciente");
-        btnDelete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeleteActionPerformed(evt);
-            }
-        });
-
-        bntEdit.setText("Editar datos");
-        bntEdit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntEditActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(117, 117, 117)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelDataPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(117, 117, 117)
                         .addComponent(jLabel2)
                         .addGap(29, 29, 29)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -370,8 +402,12 @@ public class findPacientes extends javax.swing.JPanel {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(textDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(panelDataPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
                 .addComponent(panelDosisTurno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(791, 791, 791))
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -381,24 +417,18 @@ public class findPacientes extends javax.swing.JPanel {
                         .addComponent(panelCita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(109, 109, 109)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnDelete)
-                                .addGap(18, 18, 18)
-                                .addComponent(bntEdit))
-                            .addComponent(jLabel1))))
+                        .addComponent(jLabel1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnDelete)
-                    .addComponent(bntEdit))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(52, 52, 52)
                 .addComponent(jLabel1)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(panelDosisTurno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(44, 44, 44)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -407,14 +437,11 @@ public class findPacientes extends javax.swing.JPanel {
                             .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(labelNoPaciente)
-                        .addGap(7, 7, 7)
-                        .addComponent(panelDataPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(panelDosisTurno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(panelDataPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(23, 23, 23)
                 .addComponent(panelCita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -430,25 +457,23 @@ public class findPacientes extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        buscarPaciente();
-        
+        buscarPaciente();        
     }//GEN-LAST:event_btnBuscarActionPerformed
 
-    private void buscarPaciente(){
+    private void buscarPaciente(){ // busca Paciente por número de DNI
     String DNI = textDNI.getText();        
         try {
-            p = PacientesByDNI(DNI);
+            p = PacientesByDNI(DNI);//obtengo paciente
         } catch (SQLException ex) {
             Logger.getLogger(findPacientes.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {
             Logger.getLogger(findPacientes.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        if (p.getNombre() != null) {
-           llenarPanelPaciente(p);
-           findDosis(p);
+        }        
+        if (p.getNombre() != null) {//verifico si tengo datos del paciente
+           llenarPanelPaciente(p);//lleno el panel de datos del paciente
+           findDosis(p);//busco las dosis que tiene ese paciente
             try {
-                findCitas(p);
+                findCitas(p);// buesco el turno que tiene ese paciente
             } catch (SQLException ex) {
                 Logger.getLogger(findPacientes.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ParseException ex) {
@@ -456,21 +481,30 @@ public class findPacientes extends javax.swing.JPanel {
             }
         } else{
             labelNoPaciente.setVisible(true);
-            panelDataPaciente.setVisible(false);
-            
+            panelDataPaciente.setVisible(false);            
         }
     }
+    
+     //muestra los datos de la tabla paciente
+    private void llenarPanelPaciente(Paciente p){
+            labelNoPaciente.setVisible(false);
+            panelDataPaciente.setVisible(true);
+            labelName.setText(p.getNombre());
+            labelApellido.setText(p.getApellido());
+            labelDNI.setText(p.getDni());            
+            labelFecha.setText(new SimpleDateFormat("yyyy-MM-dd", Locale.US).format(p.getFecha_nacimiento()));
+    }    
+   
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
           
             int input = JOptionPane.showConfirmDialog(null, 
                     "¿Estas seguro de eliminar al Paciente "+this.p.getNombre()+" "+this.p.getApellido()+"?"
                     , "Eliminar paciente",
 				JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
-	       if (input == 0) {
+	       if (input == 0) {// 0=yes, 1=no, 2=cancel
             PacienteDelete(this.p.getDni());
         }
 	
-	// 0=yes, 1=no, 2=cancel
 	System.out.println(input);
     }//GEN-LAST:event_btnDeleteActionPerformed
 
@@ -479,7 +513,7 @@ public class findPacientes extends javax.swing.JPanel {
       modPaciente.setVisible(true);
     }//GEN-LAST:event_bntEditActionPerformed
     
-    //finción para detectar boton eliminar o modificar de  tabla aplicacion
+    //función para detectar boton eliminar o modificar de tablaDosis
     //cuando detecta llama a la funcion correspondiente
     private void tablaDosisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaDosisMouseClicked
         int column = tablaDosis.getColumnModel().getColumnIndexAtX(evt.getX());// me dice en que columna hago click 
@@ -517,17 +551,17 @@ public class findPacientes extends javax.swing.JPanel {
         }
        
     }//GEN-LAST:event_tablaDosisMouseClicked
+
+    private void btnDeleteTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteTurnoActionPerformed
+        eliminarTurno(this.c.getId());
+    }//GEN-LAST:event_btnDeleteTurnoActionPerformed
+
+    private void bntEditTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntEditTurnoActionPerformed
+        editarTurno(this.c);
+    }//GEN-LAST:event_bntEditTurnoActionPerformed
     
-    //muestra los datos de la tabla paciente
-    private void llenarPanelPaciente(Paciente p){
-            labelNoPaciente.setVisible(false);
-            panelDataPaciente.setVisible(true);
-            labelName.setText(p.getNombre());
-            labelApellido.setText(p.getApellido());
-            labelDNI.setText(p.getDni());
-            labelFecha.setText(p.getFecha_nacimiento().toString());
-    }
-    
+   
+    //-----------------Dosis o Aplicaciones------------------------------------------
     
     private void findDosis(Paciente p){//Busca las dosis del paciente y llama a las funcion que llena la tabla con las dosis
         List<Aplicacion> ListA = new ArrayList<Aplicacion>();
@@ -546,18 +580,17 @@ public class findPacientes extends javax.swing.JPanel {
             labelNoDosis.setVisible(true);
         }
         
-    }
-    
+    }    
   
-    private void setModelo(){
+    private void setModelo(){//Crea el modelo de la tabla Dosis
      String[] cabecera = {"N°","Id","Fecha de aplicación","Lote Vacuna","Marca Vacuna","N° Dosis"," "," "};
      tablaDosisModel.setColumnIdentifiers(cabecera);
 
      tablaDosis.setModel(tablaDosisModel);
-    } //Crea el modelo de la tabla Dosis
+    } 
       
-    public void ver_tabla(JTable tabla,List<Aplicacion> ListA){
-        LimpiarTabla();
+    public void ver_tabla(JTable tabla,List<Aplicacion> ListA){//Llena la tabla con las dosis del paciente
+        LimpiarTabla();//limpio antes de llenarla, de otro modo acumula si hago dos busquedas 
         tabla.setDefaultRenderer(Object.class, new Render());
         
         JButton btn1 = new JButton("Modificar");
@@ -588,31 +621,15 @@ public class findPacientes extends javax.swing.JPanel {
         tabla.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
   
 
-    }//Llena la tabla con las dosis del paciente
+    }
     
-     public void LimpiarTabla(){
+    public void LimpiarTabla(){
         DefaultTableModel tb = (DefaultTableModel) tablaDosis.getModel();
         int a = tablaDosis.getRowCount()-1;
         for (int i = a; i >= 0; i--) {          
         tb.removeRow(tb.getRowCount()-1);
         }
         //cargaTicket();
-    }
-    private void findCitas(Paciente p) throws SQLException, ParseException{
-        Cita c = null;
-        try {
-            c = getCitaByDNI(p.getDni());
-        } catch (Exception e) {
-        }
-        
-        if (c.getFecha_cita() !=  null) {
-            llenarPanelDosis(c);
-        }else{
-            labelNoTurno.setVisible(true);
-            System.out.println("no cita");
-        }
-        
-        
     }
     
     private void llenarPanelDosis(Cita c){
@@ -621,8 +638,8 @@ public class findPacientes extends javax.swing.JPanel {
         labelFecha_cita.setText(new SimpleDateFormat("yyyy-MM-dd", Locale.US).format(c.getFecha_cita())); 
         labelDosis.setText(c.getDosis() + " dosis");
         labelVacunatorio.setText(c.getVacunatorio());        
-    }
-    
+    }   
+
     private void editarDosis(Aplicacion a){ // llama a la ventana editar dosis
 
       editDosis modDosis = new editDosis(a);
@@ -633,17 +650,54 @@ public class findPacientes extends javax.swing.JPanel {
     private void eliminarDosis(int idDosis){
         int input = JOptionPane.showConfirmDialog(null, 
                     "¿Estas seguro de eliminar la Dosis del paciente " + this.p.getNombre()+" "+this.p.getApellido()+"?"
-                    , "Eliminar paciente",
+                    , "Eliminar Dosis",
 	JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
 	if (input == 0) { // 0=yes, 1=no, 2=cancel
             AplicacionDeleteById(idDosis);
-        }
-	
+        }	
     }
+    
+    //----------------------------------Citas o Turnos------------------------------------------
+    private void findCitas(Paciente p) throws SQLException, ParseException{//Busco Turnos del paciente por DNI
+        
+        try {
+            this.c = getCitaByDNI(p.getDni());
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        
+        if (this.c.getFecha_cita() !=  null) {
+            llenarPanelDosis(this.c);
+        }else{
+            labelNoTurno.setVisible(true);
+            System.out.println("no cita");
+        }
+               
+    }
+    
+    private void editarTurno(Cita c){
+        editTurno modCita = new editTurno(c);
+        modCita.setVisible(true);
+    }
+    
+    private void eliminarTurno(int idTurno){
+        int input = JOptionPane.showConfirmDialog(null, 
+                    "¿Estas seguro de eliminar el Turno del paciente " + this.p.getNombre()+" "+this.p.getApellido()+"?"
+                    , "Eliminar Turno",
+	JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
+	if (input == 0) { // 0=yes, 1=no, 2=cancel
+            CitaDeleteByPaciente(idTurno);
+        }
+    }
+    
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntEdit;
+    private javax.swing.JButton bntEditTurno;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnDeleteTurno;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
