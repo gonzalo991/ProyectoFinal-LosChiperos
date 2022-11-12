@@ -6,7 +6,7 @@
 package GUI;
 
 import GUI.SubFrame.AllPacientes;
-import GUI.SubFrame.findPacientes;
+import GUI.SubFrame.findPaciente.findPacientes;
 
 import java.awt.BorderLayout;
 import java.sql.SQLException;

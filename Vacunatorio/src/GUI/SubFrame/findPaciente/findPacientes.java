@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GUI.SubFrame;
+package GUI.SubFrame.findPaciente;
 
+import GUI.SubFrame.Render;
 import static Persistencia.ControllerAplicacion.AplicacionByDNI;
 import static Persistencia.ControllerAplicacion.AplicacionByid;
 import static Persistencia.ControllerAplicacion.AplicacionDeleteById;
