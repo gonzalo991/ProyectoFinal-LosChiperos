@@ -126,7 +126,7 @@ public class ControllerCitas {
         //Statement stmt = null;
         //Definimos la consulta a la base de datos
 
-        String sql = "select c.id, p.nombre, p.apellido, c.dosis, v.vacunatorio, c.fecha_cita, c.estado from " 
+        String sql = "select c.id, p.nombre, p.apellido, c.dosis, v.vacunatorio, c.fecha_cita, c.estado, c.id_paciente, c.id_vacunatorio from " 
                  +"pacientes as p "
                  +"inner join cita as c on p.id = c.id_paciente " 
                  +"inner join vacunatorio as v on c.id_vacunatorio = v.id "
@@ -161,6 +161,8 @@ public class ControllerCitas {
                 cita.setEstado(rs.getBoolean("estado")); 
                 cita.setNombre(rs.getString("nombre"));
                 cita.setApellido(rs.getString("apellido"));
+                cita.setId_paciente(rs.getInt("id_paciente"));
+                cita.setId_vacunatorio(rs.getInt("id_vacunatorio"));
                         
                
                 //Con el método add, agregamos a las lista de arreglos listarCitas tosos los objetos cita que resulten de la consulta

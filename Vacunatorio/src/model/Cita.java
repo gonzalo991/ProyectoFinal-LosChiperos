@@ -10,6 +10,8 @@ public class Cita {
     private String vacunatorio;
     private boolean estado;
     private String nombre;
+    private int id_paciente;
+    private int id_vacunatorio;
 
     public String getNombre() {
         return nombre;
@@ -43,8 +45,7 @@ public class Cita {
     public void setId_vacunatorio(int id_vacunatorio) {
         this.id_vacunatorio = id_vacunatorio;
     }
-    private int id_paciente;
-     private int id_vacunatorio;
+  
 
     public int getId_paciente() {
         return id_paciente;

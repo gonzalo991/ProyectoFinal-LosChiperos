@@ -1,9 +1,9 @@
 
 package GUI.SubFrame.Turnos;
 
-import GUI.SubFrame.NewPaciente;
+
 import static Persistencia.ControllerCitas.getCitas;
-import static Persistencia.ControllerPacientes.AllPacientes;
+
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Locale;
 import javax.swing.table.DefaultTableModel;
 import model.Cita;
-import model.Paciente;
+
 
 public class AllTurnos extends javax.swing.JPanel {
     DefaultTableModel tablaDeTurnos = new DefaultTableModel();
@@ -49,7 +49,7 @@ public class AllTurnos extends javax.swing.JPanel {
                 i++;
                 tablaDeTurnos.addRow(Registro);
             }
-              TablaTurnos.setModel(tablaDeTurnos);                   
+              TablaTurnos.setModel(tablaDeTurnos);                
             
             
       
@@ -119,9 +119,7 @@ public class AllTurnos extends javax.swing.JPanel {
 
     private void btnNewTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewTurnoActionPerformed
         
-        NewPaciente Nuevo = new NewPaciente();
-        Nuevo.setLocationRelativeTo(null);
-        Nuevo.setVisible(true);
+     
         
     }//GEN-LAST:event_btnNewTurnoActionPerformed
     
