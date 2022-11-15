@@ -118,6 +118,8 @@ public class AllTurnos extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNewTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewTurnoActionPerformed
+        newTurno nuevoturno = new newTurno();
+        nuevoturno.setVisible(true);
         
      
         
