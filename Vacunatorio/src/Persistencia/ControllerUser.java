@@ -16,26 +16,30 @@ public class ControllerUser {
     public static void UsuarioBypass(String user, String pass, login lo){
         User usuario = new User();
         
-         String sql = "SELECT user, email FROM user"
-                        +" where pass = ?";
+         String sql = "SELECT u.user, u.email, u.permisos, v.vacunatorio FROM user as u"
+                        +" inner join vacunatorio as v on u.id_vacunatorio = v.id"
+                        +" where u.pass = ? and u.user = ?";
          try {
             Connection conn;
             conn = connect();
             PreparedStatement prepared = conn.prepareStatement(sql);
             prepared.setString(1, pass);
+            prepared.setString(2, user);
             ResultSet rs;
             rs = prepared.executeQuery();
             
             while(rs.next()){             
                
                 usuario.setUser(rs.getString("user"));
-                usuario.setEmail(rs.getString("email"));                
+                usuario.setEmail(rs.getString("email"));
+                usuario.setPermisos(rs.getString("permisos"));
+                usuario.setVacunatorio(rs.getString("vacunatorio"));
             }
             conn.close();
             
              if (user.equals(usuario.getUser())) {
                  lo.dispose();
-                 Principal p = new Principal();
+                 Principal p = new Principal(usuario);
                  p.setSize(1280, 720);
                  p.setLocationRelativeTo(null);
                  p.setVisible(true);

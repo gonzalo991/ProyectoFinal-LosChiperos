@@ -250,8 +250,8 @@ public class ControllerCitas {
     
     //Método para acordar un turno
     public static void CitaInsert(Cita c) {
-
-        String sql = "INSERT INTO cita (fecha_cita,dosis,vacunatorio,id_paciente) VALUES(?,?,?,?)";
+        System.out.println("in controlle"+c.getVacunatorio());
+        String sql = "INSERT INTO cita (fecha_cita,dosis,vacunatorio,id_paciente,id_vacunatorio,estado) VALUES(?,?,?,?,?,?)";
         
         try {
             Connection conn;
@@ -262,6 +262,9 @@ public class ControllerCitas {
             pstmt.setInt(2, c.getDosis());
             pstmt.setString(3, c.getVacunatorio());
             pstmt.setInt(4, c.getId_paciente());
+            pstmt.setInt(5, c.getId_vacunatorio());
+            pstmt.setBoolean(6, c.isEstado());
+            
 
             pstmt.executeUpdate();
             System.out.println("Cita ingresada Ok");

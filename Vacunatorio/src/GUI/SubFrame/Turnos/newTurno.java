@@ -7,7 +7,10 @@ package GUI.SubFrame.Turnos;
 
 
 import static Persistencia.ControllerCentro.AllCentros;
+import static Persistencia.ControllerCitas.CitaInsert;
 import static Persistencia.ControllerCitas.CitaUpdate;
+import static Persistencia.ControllerPacientes.PacientesByDNI;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -17,6 +20,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Centro;
 import model.Cita;
+import model.Paciente;
 
 
 
@@ -27,8 +31,9 @@ import model.Cita;
 public class newTurno extends javax.swing.JFrame {
 
     Cita cita;
+    
     public newTurno() {
-        initComponents();
+        initComponents();      
         
         setDataFormulario();       
     }
@@ -48,6 +53,7 @@ public class newTurno extends javax.swing.JFrame {
             ComboCentros.addItem(c.getVacunatorio());
         }
         //ComboCentros.setSelectedIndex(5);
+        
     }
     
 
@@ -69,7 +75,7 @@ public class newTurno extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        textFechaCita1 = new javax.swing.JTextField();
+        textDNI = new javax.swing.JTextField();
         ComboCentros = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -121,7 +127,7 @@ public class newTurno extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(textFechaCita1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(textDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1)
@@ -148,7 +154,7 @@ public class newTurno extends javax.swing.JFrame {
                 .addComponent(jLabel5)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textFechaCita1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -184,6 +190,33 @@ public class newTurno extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        Paciente p = null;
+        Cita c = new Cita();
+        try {
+            p = PacientesByDNI(textDNI.getText());
+        } catch (SQLException ex) {
+            Logger.getLogger(newTurno.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(newTurno.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if (p.getNombre() != null) {           
+           
+            c.setDosis(Integer.parseInt(textDosis.getText()));
+            c.setId_paciente(p.getId());
+            try {
+                c.setFecha_cita(new SimpleDateFormat("yyyy-MM-dd").parse(textFechaCita.getText()));
+            } catch (ParseException ex) {
+                Logger.getLogger(newTurno.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            c.setId_vacunatorio(ComboCentros.getSelectedIndex()+1);
+            c.setVacunatorio( String.valueOf(ComboCentros.getSelectedItem()));
+            c.setEstado(false);
+            
+            CitaInsert(c);
+        } else {
+            System.out.println("no no se pudo insertar cita");
+        }
+        
 //        try {
 //            this.cita.setFecha_cita(new SimpleDateFormat("yyyy-MM-dd").parse(textFechaCita.getText()));
 //        } catch (ParseException ex) {
@@ -210,9 +243,9 @@ public class newTurno extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField textDNI;
     private javax.swing.JTextField textDosis;
     private javax.swing.JTextField textFechaCita;
-    private javax.swing.JTextField textFechaCita1;
     // End of variables declaration//GEN-END:variables
 
  
