@@ -6,6 +6,7 @@
 package GUI;
 
 import GUI.SubFrame.AllPacientes;
+import GUI.SubFrame.Turnos.AllTurnos;
 import GUI.SubFrame.findPaciente.findPacientes;
 
 import java.awt.BorderLayout;
@@ -27,6 +28,7 @@ public class Principal extends javax.swing.JFrame {
     /**
      * Creates new form Principal
      */
+    
     public Principal() {
         initComponents();
         PanelContenedor.setLocation(0, 0);
@@ -186,7 +188,15 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_findPacienteActionPerformed
 
     private void citaByDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_citaByDateActionPerformed
-
+        AllTurnos t = null;
+        try {
+            t = new AllTurnos();
+        } catch (SQLException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ShowPanel(t);
           
     }//GEN-LAST:event_citaByDateActionPerformed
     

@@ -1,69 +1,76 @@
 
-package GUI.SubFrame;
+package GUI.SubFrame.Turnos;
 
+import GUI.SubFrame.NewPaciente;
+import static Persistencia.ControllerCitas.getCitas;
 import static Persistencia.ControllerPacientes.AllPacientes;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import javax.swing.table.DefaultTableModel;
+import model.Cita;
 import model.Paciente;
 
-public class AllPacientes extends javax.swing.JPanel {
-    DefaultTableModel tablaDePacientes = new DefaultTableModel();
-    List<Paciente> listarPacientes = new ArrayList<Paciente>();
+public class AllTurnos extends javax.swing.JPanel {
+    DefaultTableModel tablaDeTurnos = new DefaultTableModel();
+    List<Cita> listarTurnos = new ArrayList<Cita>();
     
-    public AllPacientes() throws SQLException, ParseException {
+    public AllTurnos() throws SQLException, ParseException {
         initComponents();
         setModelo();
         LlenarLista();
     }
     
     private void setModelo(){
-     String[] cabecera = {"N°","Id","Nombre","Vacunatorio","DNI","Fecha de nacimiento"};
-     tablaDePacientes.setColumnIdentifiers(cabecera);
-     TablaPacientes.setModel(tablaDePacientes);
+     String[] cabecera = {"N°","Id","Nombre","Apellido","Dosis","Fecha","Vacunatorio"};
+     tablaDeTurnos.setColumnIdentifiers(cabecera);
+     TablaTurnos.setModel(tablaDeTurnos);
     }
     
     private void LlenarLista() throws SQLException, ParseException{
-        Object[] Registro = new Object[tablaDePacientes.getColumnCount()];
+        Object[] Registro = new Object[tablaDeTurnos.getColumnCount()];
+        
+            listarTurnos = getCitas("2022-12-16",false);
 
-            listarPacientes = AllPacientes();
             int i = 1;
-            for (Paciente p : listarPacientes) {
+            for (Cita c : listarTurnos) {
                 Registro[0] = i;
-                Registro[1] = p.getId();
-                Registro[2] = p.getNombre();
-                Registro[3] = p.getApellido();
-                Registro[4] = p.getDni();
-                Registro[5] = new SimpleDateFormat("yyyy-MM-dd", Locale.US).format(p.getFecha_nacimiento());
+                Registro[1] = c.getId();
+                Registro[2] = c.getNombre();
+                Registro[3] = c.getApellido();
+                Registro[4] = c.getDosis();
+                Registro[5] = new SimpleDateFormat("yyyy-MM-dd", Locale.US).format(c.getFecha_cita());
+                Registro[6] = c.getVacunatorio();
                 
                 i++;
-                tablaDePacientes.addRow(Registro);
+                tablaDeTurnos.addRow(Registro);
             }
-              TablaPacientes.setModel(tablaDePacientes);                   
+              TablaTurnos.setModel(tablaDeTurnos);                   
             
             
       
         
     }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         label1 = new java.awt.Label();
         jScrollPane1 = new javax.swing.JScrollPane();
-        TablaPacientes = new javax.swing.JTable();
-        btnNewPaciente = new javax.swing.JButton();
+        TablaTurnos = new javax.swing.JTable();
+        btnNewTurno = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(1200, 600));
 
-        label1.setText("Todos los pacientes");
+        label1.setText("Turnos de la Fecha");
 
-        TablaPacientes.setModel(new javax.swing.table.DefaultTableModel(
+        TablaTurnos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -74,12 +81,12 @@ public class AllPacientes extends javax.swing.JPanel {
 
             }
         ));
-        jScrollPane1.setViewportView(TablaPacientes);
+        jScrollPane1.setViewportView(TablaTurnos);
 
-        btnNewPaciente.setText("Registrar Paciente");
-        btnNewPaciente.addActionListener(new java.awt.event.ActionListener() {
+        btnNewTurno.setText("Asignar Turno");
+        btnNewTurno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNewPacienteActionPerformed(evt);
+                btnNewTurnoActionPerformed(evt);
             }
         });
 
@@ -91,10 +98,10 @@ public class AllPacientes extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnNewPaciente))
+                    .addComponent(btnNewTurno))
                 .addGap(67, 67, 67)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 820, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(173, Short.MAX_VALUE))
+                .addContainerGap(193, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,23 +112,23 @@ public class AllPacientes extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnNewPaciente)))
+                        .addComponent(btnNewTurno)))
                 .addContainerGap(168, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnNewPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewPacienteActionPerformed
+    private void btnNewTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewTurnoActionPerformed
         
         NewPaciente Nuevo = new NewPaciente();
         Nuevo.setLocationRelativeTo(null);
         Nuevo.setVisible(true);
         
-    }//GEN-LAST:event_btnNewPacienteActionPerformed
+    }//GEN-LAST:event_btnNewTurnoActionPerformed
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable TablaPacientes;
-    private javax.swing.JButton btnNewPaciente;
+    private javax.swing.JTable TablaTurnos;
+    private javax.swing.JButton btnNewTurno;
     private javax.swing.JScrollPane jScrollPane1;
     private java.awt.Label label1;
     // End of variables declaration//GEN-END:variables

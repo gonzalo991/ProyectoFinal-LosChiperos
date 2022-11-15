@@ -4,6 +4,9 @@ package vacunatorio;
 import GUI.login;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
+import model.Cita;
 
 public class Vacunatorio {
 
@@ -15,5 +18,6 @@ public class Vacunatorio {
         
        
     }
+            
     
 }
