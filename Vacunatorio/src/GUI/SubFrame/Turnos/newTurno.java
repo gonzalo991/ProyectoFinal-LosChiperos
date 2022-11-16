@@ -6,7 +6,9 @@
 package GUI.SubFrame.Turnos;
 
 
+import static Mail.Mail.enviarMail;
 import static Persistencia.ControllerCentro.AllCentros;
+import static Persistencia.ControllerCentro.GetCentro;
 import static Persistencia.ControllerCitas.CitaInsert;
 import static Persistencia.ControllerCitas.CitaUpdate;
 import static Persistencia.ControllerPacientes.PacientesByDNI;
@@ -213,6 +215,7 @@ public class newTurno extends javax.swing.JFrame {
             c.setEstado(false);
             
             CitaInsert(c);
+            SetMail(c,p);
         } else {
             System.out.println("no no se pudo insertar cita");
         }
@@ -228,7 +231,19 @@ public class newTurno extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnModificarActionPerformed
 
-    
+    private void SetMail(Cita c, Paciente p){
+        Centro centro = GetCentro(c.getId_vacunatorio());
+        String asunto = "Turno Generado - Vacunación COVID-19 - Chiperos";
+        String cuerpo = p.getNombre() +" "+p.getApellido() + "\n"
+                        + "Se asignó un turno para el día " + c.getFecha_cita() + "\n"
+                        + "para aplicarse la dosis N° "+c.getDosis()+ "\n"
+                        + "presentarse en el vacunatorio " + centro.getVacunatorio()+ "\n"
+                        + "Domicilio "+ centro.getDomicilio() + " - "+ centro.getLocalidad() +"-" +centro.getProvincia() + "\n"
+                        + "en los siguientes horarios " + centro.getHorarios()+ "\n"
+                        + "ante cualquier inconveniente comunicarse al "+ centro.getTelefono();
+        String emailsend = p.getEmail();
+        enviarMail(asunto, cuerpo, emailsend);
+    }
     /**
      * @param args the command line arguments
      */

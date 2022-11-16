@@ -36,7 +36,7 @@ public class ControllerPacientes {
                 p.setApellido(rs.getString("apellido"));
                 p.setDni(rs.getString("dni"));
                 p.setFecha_nacimiento(new SimpleDateFormat("yyyy-MM-dd").parse(rs.getString("fecha_nacimiento")));// debo convertir dado que parece que en sqlite la celda date son text
-
+                p.setEmail(rs.getString("email"));
                 ListP.add(p);
 
             }
@@ -70,7 +70,7 @@ public class ControllerPacientes {
                 p.setDni(rs.getString("dni"));
                 System.out.println(rs.getString("fecha_nacimiento"));
                 p.setFecha_nacimiento(new SimpleDateFormat("yyyy-MM-dd").parse(rs.getString("fecha_nacimiento")));// debo convertir dado que parece que en sqlite la celda date son text
-
+                 p.setEmail(rs.getString("email"));
             }
             conn.close();
             return p;
@@ -102,6 +102,7 @@ public class ControllerPacientes {
                 + "apellido = ? ,"
                 + "dni = ? ,"
                 + "fecha_nacimiento = ? "
+                + "email = ? "
                 + "WHERE id = ?";
         try {
             Connection conn;
@@ -112,7 +113,8 @@ public class ControllerPacientes {
             pstmt.setString(3, p.getDni());
             DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
             pstmt.setString(4, df.format(p.getFecha_nacimiento()));
-            pstmt.setInt(5, p.getId());
+             pstmt.setString(5, p.getEmail());
+            pstmt.setInt(6, p.getId());
 
             pstmt.executeUpdate();
             System.out.println("Paciente actualizado Ok");
@@ -125,7 +127,7 @@ public class ControllerPacientes {
 
     public static void PacienteInsert(Paciente p) {
 
-        String sql = "INSERT INTO pacientes(nombre,apellido,dni,fecha_nacimiento) VALUES(?,?,?,?)";
+        String sql = "INSERT INTO pacientes(nombre,apellido,dni,fecha_nacimiento,email) VALUES(?,?,?,?,?)";
         try {
             Connection conn;
             conn = connect();
@@ -135,6 +137,7 @@ public class ControllerPacientes {
             pstmt.setString(3, p.getDni());
             DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
             pstmt.setString(4, df.format(p.getFecha_nacimiento()));
+            pstmt.setString(5, p.getEmail());
             pstmt.executeUpdate();
             System.out.println("Paciente ingresado Ok");
             conn.close();

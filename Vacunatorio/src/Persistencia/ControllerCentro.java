@@ -50,4 +50,35 @@ public class ControllerCentro {
         }  
          return listaCentros;
     }
+    public static Centro GetCentro(int id){
+        String sql = "SELECT * FROM vacunatorio"
+                + " where id = ?";
+        Centro c = new Centro();
+
+        try {
+            Connection conn;
+            conn = connect();
+            PreparedStatement prepared = conn.prepareStatement(sql);
+            prepared.setInt(1, id);
+            ResultSet rs;
+            rs = prepared.executeQuery();
+
+            while (rs.next()) {
+                c.setId(rs.getInt("id"));
+                c.setVacunatorio(rs.getString("vacunatorio"));
+                c.setDomicilio(rs.getString("domicilio"));
+                c.setLocalidad(rs.getString("localidad"));
+                c.setProvincia(rs.getString("provincia"));
+                c.setTelefono(rs.getString("telefono"));
+                c.setHorarios(rs.getString("horarios"));
+                
+
+            }
+            conn.close();
+            return c;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return c;
+    }
 }
