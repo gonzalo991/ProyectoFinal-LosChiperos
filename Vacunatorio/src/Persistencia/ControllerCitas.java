@@ -184,7 +184,208 @@ public class ControllerCitas {
         return listarCitas;
     }
     
-    //Método para borrar el turno con el id
+    public static List<Cita> getCitas(String fecha_cita) throws ParseException{
+    //Definimos e instanciamos una Lista de arreglos
+        List<Cita> listarCitas = new ArrayList<Cita>();
+        //Se define e inicializa una sentencia 
+
+        //Statement stmt = null;
+        //Definimos la consulta a la base de datos
+
+        String sql = "select c.id, p.nombre, p.apellido, c.dosis, v.vacunatorio, c.fecha_cita, c.estado, c.id_paciente, c.id_vacunatorio from " 
+                 +"pacientes as p "
+                 +"inner join cita as c on p.id = c.id_paciente " 
+                 +"inner join vacunatorio as v on c.id_vacunatorio = v.id "
+                 +"where c.fecha_cita = ?";
+
+        //Entramos en el bloque try and catch
+        try {
+              //Conexión a la base de datos
+            Connection conn;
+            conn = connect();
+            //Inicializo una sentencia con parámetros y le paso la consulta
+            PreparedStatement prepared = conn.prepareStatement(sql);
+            //luego le paso los parámetros
+                                                         
+
+            
+            prepared.setString(1, fecha_cita);
+            
+            //inicializamo el result set y ejecutamos la consulta
+            ResultSet rs;
+            rs = prepared.executeQuery();
+
+            //Entramos en un bucle while con la condición de se ejecute mientras que el set de resultados tenga un indice seguido de otro
+            while (rs.next()) {
+                //Instanciamos la cita
+                Cita cita = new Cita();
+                //Empezamos a cargar los resultados mediante los setters
+                cita.setId(rs.getInt("id"));
+                cita.setFecha_cita(new SimpleDateFormat("yyyy-MM-dd").parse(rs.getString("fecha_cita")));// debo convertir dado que parece que en sqlite la celda date son text
+                cita.setDosis(rs.getInt("dosis"));
+                cita.setVacunatorio(rs.getString("vacunatorio"));
+                cita.setEstado(rs.getBoolean("estado")); 
+                cita.setNombre(rs.getString("nombre"));
+                cita.setApellido(rs.getString("apellido"));
+                cita.setId_paciente(rs.getInt("id_paciente"));
+                cita.setId_vacunatorio(rs.getInt("id_vacunatorio"));
+                        
+               
+                //Con el método add, agregamos a las lista de arreglos listarCitas tosos los objetos cita que resulten de la consulta
+                listarCitas.add(cita);
+
+            }
+
+            //Cerramos la conexion a la base de datos
+            conn.close();
+
+            //Devolvemos la lista 
+            return listarCitas;
+
+            //En Caso de haber algún error se ejecutará el bloque catch enviando una excepción
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return listarCitas;
+    }
+    
+    public static List<Cita> getCitas(String fecha_cita, boolean estado,int id_vacunatorio) throws ParseException{
+    //Definimos e instanciamos una Lista de arreglos
+        List<Cita> listarCitas = new ArrayList<Cita>();
+        //Se define e inicializa una sentencia 
+
+        //Statement stmt = null;
+        //Definimos la consulta a la base de datos
+
+        String sql = "select c.id, p.nombre, p.apellido, c.dosis, v.vacunatorio, c.fecha_cita, c.estado, c.id_paciente, c.id_vacunatorio from " 
+                 +"pacientes as p "
+                 +"inner join cita as c on p.id = c.id_paciente " 
+                 +"inner join vacunatorio as v on c.id_vacunatorio = v.id "
+                 +"where c.fecha_cita = ? and c.estado = ? and c.id_vacunatorio = ?";
+
+        //Entramos en el bloque try and catch
+        try {
+              //Conexión a la base de datos
+            Connection conn;
+            conn = connect();
+            //Inicializo una sentencia con parámetros y le paso la consulta
+            PreparedStatement prepared = conn.prepareStatement(sql);
+            //luego le paso los parámetros
+                                                         
+
+            
+            prepared.setString(1, fecha_cita);
+            prepared.setBoolean(2, estado);
+            prepared.setInt(3, id_vacunatorio);
+            //inicializamo el result set y ejecutamos la consulta
+            ResultSet rs;
+            rs = prepared.executeQuery();
+
+            //Entramos en un bucle while con la condición de se ejecute mientras que el set de resultados tenga un indice seguido de otro
+            while (rs.next()) {
+                //Instanciamos la cita
+                Cita cita = new Cita();
+                //Empezamos a cargar los resultados mediante los setters
+                cita.setId(rs.getInt("id"));
+                cita.setFecha_cita(new SimpleDateFormat("yyyy-MM-dd").parse(rs.getString("fecha_cita")));// debo convertir dado que parece que en sqlite la celda date son text
+                cita.setDosis(rs.getInt("dosis"));
+                cita.setVacunatorio(rs.getString("vacunatorio"));
+                cita.setEstado(rs.getBoolean("estado")); 
+                cita.setNombre(rs.getString("nombre"));
+                cita.setApellido(rs.getString("apellido"));
+                cita.setId_paciente(rs.getInt("id_paciente"));
+                cita.setId_vacunatorio(rs.getInt("id_vacunatorio"));
+                        
+               
+                //Con el método add, agregamos a las lista de arreglos listarCitas tosos los objetos cita que resulten de la consulta
+                listarCitas.add(cita);
+
+            }
+
+            //Cerramos la conexion a la base de datos
+            conn.close();
+
+            //Devolvemos la lista 
+            return listarCitas;
+
+            //En Caso de haber algún error se ejecutará el bloque catch enviando una excepción
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return listarCitas;
+    }
+    
+    public static List<Cita> getCitas(String fecha_cita,int id_vacunatorio) throws ParseException{
+    //Definimos e instanciamos una Lista de arreglos
+        List<Cita> listarCitas = new ArrayList<Cita>();
+        //Se define e inicializa una sentencia 
+
+        //Statement stmt = null;
+        //Definimos la consulta a la base de datos
+
+        String sql = "select c.id, p.nombre, p.apellido, c.dosis, v.vacunatorio, c.fecha_cita, c.estado, c.id_paciente, c.id_vacunatorio from " 
+                 +"pacientes as p "
+                 +"inner join cita as c on p.id = c.id_paciente " 
+                 +"inner join vacunatorio as v on c.id_vacunatorio = v.id "
+                 +"where c.fecha_cita = ? and c.id_vacunatorio = ?";
+
+        //Entramos en el bloque try and catch
+        try {
+              //Conexión a la base de datos
+            Connection conn;
+            conn = connect();
+            //Inicializo una sentencia con parámetros y le paso la consulta
+            PreparedStatement prepared = conn.prepareStatement(sql);
+            //luego le paso los parámetros
+                                                         
+
+            
+            prepared.setString(1, fecha_cita);          
+            prepared.setInt(2, id_vacunatorio);
+            //inicializamo el result set y ejecutamos la consulta
+            ResultSet rs;
+            rs = prepared.executeQuery();
+
+            //Entramos en un bucle while con la condición de se ejecute mientras que el set de resultados tenga un indice seguido de otro
+            while (rs.next()) {
+                //Instanciamos la cita
+                Cita cita = new Cita();
+                //Empezamos a cargar los resultados mediante los setters
+                cita.setId(rs.getInt("id"));
+                cita.setFecha_cita(new SimpleDateFormat("yyyy-MM-dd").parse(rs.getString("fecha_cita")));// debo convertir dado que parece que en sqlite la celda date son text
+                cita.setDosis(rs.getInt("dosis"));
+                cita.setVacunatorio(rs.getString("vacunatorio"));
+                cita.setEstado(rs.getBoolean("estado")); 
+                cita.setNombre(rs.getString("nombre"));
+                cita.setApellido(rs.getString("apellido"));
+                cita.setId_paciente(rs.getInt("id_paciente"));
+                cita.setId_vacunatorio(rs.getInt("id_vacunatorio"));
+                        
+               
+                //Con el método add, agregamos a las lista de arreglos listarCitas tosos los objetos cita que resulten de la consulta
+                listarCitas.add(cita);
+
+            }
+
+            //Cerramos la conexion a la base de datos
+            conn.close();
+
+            //Devolvemos la lista 
+            return listarCitas;
+
+            //En Caso de haber algún error se ejecutará el bloque catch enviando una excepción
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return listarCitas;
+    }
+    
+
+
+//Método para borrar el turno con el id
     public static void CitaDeleteById(int id) {
         String sql = "DELETE FROM cita where id = ?";
        
