@@ -2,7 +2,10 @@
 package GUI.SubFrame.Turnos;
 
 
+import GUI.SubFrame.Render;
 import static Persistencia.ControllerCentro.AllCentros;
+import static Persistencia.ControllerCitas.CitaUpdate;
+import static Persistencia.ControllerCitas.getCitaById;
 import static Persistencia.ControllerCitas.getCitas;
 import com.toedter.calendar.JDateChooser;
 
@@ -16,6 +19,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import model.Centro;
 import model.Cita;
@@ -61,7 +66,7 @@ public class AllTurnos extends javax.swing.JPanel {
         }
     }
     private void setModelo(){
-     String[] cabecera = {"N°","Id","Nombre","Apellido","Dosis","Fecha","Vacunatorio", "Estado"};
+     String[] cabecera = {"Id","Id_Paciente","Nombre","Apellido","Dosis","Fecha","Vacunatorio", "Estado",""};
      tablaDeTurnos.setColumnIdentifiers(cabecera);
      TablaTurnos.setModel(tablaDeTurnos);
     }
@@ -69,23 +74,30 @@ public class AllTurnos extends javax.swing.JPanel {
     private void LlenarLista( List<Cita> listaTurnos) throws SQLException, ParseException{
         Object[] Registro = new Object[tablaDeTurnos.getColumnCount()];
         LimpiarTabla();
+        TablaTurnos.setDefaultRenderer(Object.class, new Render());
             //listarTurnos = getCitas("2022-12-16",true);
-
-            int i = 1;
+           JButton btn1 = new JButton("Cumplir");
+            btn1.setName("cumplir");
+            
             for (Cita c : listarTurnos) {
-                Registro[0] = i;
-                Registro[1] = c.getId();
+                Registro[0] = c.getId();
+                Registro[1] = c.getId_paciente();
                 Registro[2] = c.getNombre();
                 Registro[3] = c.getApellido();
                 Registro[4] = c.getDosis();
                 Registro[5] = new SimpleDateFormat("yyyy-MM-dd", Locale.US).format(c.getFecha_cita());
                 Registro[6] = c.getVacunatorio();
                 Registro[7] = c.isEstado() ? "Cumplido" : "Pendiente";
+                Registro[8] = c.isEstado() ? "" : btn1;
                 
-                i++;
+                
+               
                 tablaDeTurnos.addRow(Registro);
             }
-              TablaTurnos.setModel(tablaDeTurnos);               
+              TablaTurnos.setModel(tablaDeTurnos);
+              TablaTurnos.setPreferredScrollableViewportSize(TablaTurnos.getPreferredSize());
+        TablaTurnos.setRowHeight(30);
+        TablaTurnos.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
 
     }
     public void LimpiarTabla(){
@@ -94,7 +106,7 @@ public class AllTurnos extends javax.swing.JPanel {
         for (int i = a; i >= 0; i--) {          
         tb.removeRow(tb.getRowCount()-1);
         }
-        //cargaTicket();
+        
     }
     
     @SuppressWarnings("unchecked")
@@ -117,7 +129,6 @@ public class AllTurnos extends javax.swing.JPanel {
         ComboCentros = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         btnBuscar = new javax.swing.JButton();
-        verDate = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(1200, 600));
@@ -135,6 +146,11 @@ public class AllTurnos extends javax.swing.JPanel {
 
             }
         ));
+        TablaTurnos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaTurnosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(TablaTurnos);
 
         btnNewTurno.setText("Asignar Turno");
@@ -233,10 +249,6 @@ public class AllTurnos extends javax.swing.JPanel {
             }
         });
 
-        verDate.setBackground(new java.awt.Color(255, 255, 255));
-        verDate.setForeground(new java.awt.Color(0, 0, 0));
-        verDate.setText("Fecha del Turno");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -245,10 +257,7 @@ public class AllTurnos extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(DateTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(verDate)))
+                    .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -268,9 +277,7 @@ public class AllTurnos extends javax.swing.JPanel {
                         .addGap(24, 24, 24)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(verDate, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -324,9 +331,6 @@ public class AllTurnos extends javax.swing.JPanel {
     private void btnNewTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewTurnoActionPerformed
         newTurno nuevoturno = new newTurno();
         nuevoturno.setVisible(true);
-        
-     
-        
     }//GEN-LAST:event_btnNewTurnoActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
@@ -394,6 +398,41 @@ public class AllTurnos extends javax.swing.JPanel {
     private void DateTurnoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DateTurnoKeyPressed
       
     }//GEN-LAST:event_DateTurnoKeyPressed
+
+    private void TablaTurnosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaTurnosMouseClicked
+             int column = TablaTurnos.getColumnModel().getColumnIndexAtX(evt.getX());// me dice en que columna hago click 
+        int row = evt.getY()/TablaTurnos.getRowHeight();// me dice en que fila hago click 
+        if(row < TablaTurnos.getRowCount() && row >= 0 && column < TablaTurnos.getColumnCount() && column >= 0){ // me aseguro que los valores de filas y columnas tengan un valor logico
+            Object value = TablaTurnos.getValueAt(row, column); // traigo el objeto según fila y columna
+            if(value instanceof JButton){ // me aseguro que el click sea en un botón 
+                ((JButton)value).doClick();
+                JButton boton = (JButton) value;
+
+                if(boton.getName().equals("cumplir")){ //si el botón es igual a cumplido
+                    int idDosis = Integer.parseInt(TablaTurnos.getValueAt(row, column-8).toString());// traigo el valor de la celda id de la fila 
+                   
+                    try {
+                     Cita  c = getCitaById(idDosis);
+                         InsertDosis newDosis = new InsertDosis(c);
+                         CitaUpdate(idDosis);
+                         newDosis.setVisible(true);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(AllTurnos.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (ParseException ex) {
+                        Logger.getLogger(AllTurnos.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    //"Id","Id_Paciente","Nombre","Apellido","Dosis","Fecha","Vacunatorio", "Estado",
+                    // Cuando se cumple el turno se genaran dos acciones - 
+                        //1_Se cambia el estado al turno
+                        //1_Se inserta la aplicacion de dosis
+                     
+                     
+                      
+                }
+
+            }
+        }
+    }//GEN-LAST:event_TablaTurnosMouseClicked
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -413,6 +452,5 @@ public class AllTurnos extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private java.awt.Label label1;
-    private javax.swing.JLabel verDate;
     // End of variables declaration//GEN-END:variables
 }

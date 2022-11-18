@@ -30,10 +30,9 @@ public class Principal extends javax.swing.JFrame {
     public Principal(User Usuario) {
         initComponents();
         this.Usuario = Usuario;
-        PanelContenedor.setLocation(0, 0);
-        labelUserName.setText(Usuario.getUser());
+        PanelContenedor.setLocation(0, 0);       
         labelVacunatorio.setText(Usuario.getVacunatorio());
-        
+        MenuUser.setText(Usuario.getUser());
     }
 
     /**
@@ -48,11 +47,11 @@ public class Principal extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         PanelContenedor = new javax.swing.JPanel();
         PanelDataUser = new javax.swing.JPanel();
-        label1 = new java.awt.Label();
-        labelUserName = new java.awt.Label();
         label2 = new java.awt.Label();
         labelVacunatorio = new java.awt.Label();
         menu = new javax.swing.JMenuBar();
+        MenuUser = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
         btnPacientes = new javax.swing.JMenu();
         viewPacientes = new javax.swing.JMenuItem();
         findPaciente = new javax.swing.JMenuItem();
@@ -84,10 +83,6 @@ public class Principal extends javax.swing.JFrame {
 
         PanelDataUser.setBackground(new java.awt.Color(255, 255, 255));
 
-        label1.setText("Operador:");
-
-        labelUserName.setText("UserName");
-
         label2.setText("Centro de Trabajo:");
 
         labelVacunatorio.setText("Vacunatorio");
@@ -97,16 +92,10 @@ public class Principal extends javax.swing.JFrame {
         PanelDataUserLayout.setHorizontalGroup(
             PanelDataUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelDataUserLayout.createSequentialGroup()
-                .addGroup(PanelDataUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PanelDataUserLayout.createSequentialGroup()
-                        .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(2, 2, 2)
-                        .addComponent(labelVacunatorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(PanelDataUserLayout.createSequentialGroup()
-                        .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(2, 2, 2)
-                        .addComponent(labelUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
+                .addComponent(labelVacunatorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(1718, Short.MAX_VALUE))
         );
         PanelDataUserLayout.setVerticalGroup(
             PanelDataUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -115,10 +104,6 @@ public class Principal extends javax.swing.JFrame {
                 .addGroup(PanelDataUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelVacunatorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(PanelDataUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -138,8 +123,8 @@ public class Principal extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(PanelDataUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addComponent(PanelDataUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addComponent(PanelContenedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -147,6 +132,13 @@ public class Principal extends javax.swing.JFrame {
         menu.setBackground(new java.awt.Color(255, 255, 255));
         menu.setBorder(null);
         menu.setForeground(new java.awt.Color(0, 0, 0));
+
+        MenuUser.setText("jMenu1");
+
+        jMenuItem3.setText("Cerrar Sesión");
+        MenuUser.add(jMenuItem3);
+
+        menu.add(MenuUser);
 
         btnPacientes.setText("Pacientes");
 
@@ -269,6 +261,7 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu Aplicaciones;
+    private javax.swing.JMenu MenuUser;
     private javax.swing.JPanel PanelContenedor;
     private javax.swing.JPanel PanelDataUser;
     private javax.swing.JMenu Turnos;
@@ -277,10 +270,9 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem findPaciente;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
-    private java.awt.Label label1;
     private java.awt.Label label2;
-    private java.awt.Label labelUserName;
     private java.awt.Label labelVacunatorio;
     private javax.swing.JMenuBar menu;
     private javax.swing.JMenuItem viewPacientes;

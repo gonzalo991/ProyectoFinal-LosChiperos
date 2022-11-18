@@ -2,6 +2,7 @@ package Persistencia;
 
 import static Persistencia.Connect.connect;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -191,6 +192,7 @@ public class ControllerAplicacion {
             PreparedStatement pstmt = conn.prepareStatement(sql);
             DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
             pstmt.setString(1, df.format(a.getFecha_ult_dosis()));
+            //pstmt.setDate(1, (Date) a.getFecha_ult_dosis());
             pstmt.setString(2, a.getVacunatorio());
             pstmt.setString(3, a.getLote_vacuna());
             pstmt.setString(4, a.getMarca_vacuna());

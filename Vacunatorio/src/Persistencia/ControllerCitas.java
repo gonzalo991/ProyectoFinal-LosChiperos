@@ -74,9 +74,10 @@ public class ControllerCitas {
     public static Cita getCitaByDNI(String dni) throws SQLException, ParseException {
 
         //Declaro la consulta mysql
-        String sql = "select c.id, c.dosis, c.fecha_cita, c.vacunatorio, c.id_paciente from "
-                + "pacientes as p "
-                + "inner join cita as c on p.id = c.id_paciente "
+        String sql = "select c.id, p.nombre, p.apellido, c.dosis, v.vacunatorio, c.fecha_cita, c.estado, c.id_paciente, c.id_vacunatorio from " 
+                 +"pacientes as p "
+                 +"inner join cita as c on p.id = c.id_paciente " 
+                 +"inner join vacunatorio as v on c.id_vacunatorio = v.id "
                 + "where p.dni = ?";
 
         //Instancio la cita
@@ -103,6 +104,60 @@ public class ControllerCitas {
                 cita.setFecha_cita(new SimpleDateFormat("yyyy-MM-dd").parse(rs.getString("fecha_cita")));// debo convertir dado que parece que en sqlite la celda date son text
                 cita.setVacunatorio(rs.getString("vacunatorio"));
                 cita.setId_paciente(rs.getInt("id_paciente"));
+                cita.setNombre(rs.getString("nombre"));
+                cita.setApellido(rs.getString("apellido"));
+                cita.setId_vacunatorio(rs.getInt("id_vacunatorio"));
+            }
+            
+            //Cerramos la conexión a la base de datos y devolvemos el objeto
+            conn.close();
+            
+            return cita;
+            
+        } catch (SQLException e) {
+            
+            System.out.println(e.getMessage());
+        }
+        
+        return cita;
+    }
+    
+        public static Cita getCitaById(int id) throws SQLException, ParseException {
+
+        //Declaro la consulta mysql
+        String sql = "select c.id, p.nombre, p.apellido, c.dosis, v.vacunatorio, c.fecha_cita, c.estado, c.id_paciente, c.id_vacunatorio from " 
+                 +"pacientes as p "
+                 +"inner join cita as c on p.id = c.id_paciente " 
+                 +"inner join vacunatorio as v on c.id_vacunatorio = v.id "
+                 +"where c.id = ?";
+
+        //Instancio la cita
+        Cita cita = new Cita();
+
+        try {
+            
+            //Conexión a la base de datos
+            Connection conn;
+            conn = connect();
+            //Inicializo una sentencia con parámetros y le paso la consulta
+            PreparedStatement prepared = conn.prepareStatement(sql);
+            //luego le paso los parámetros
+            prepared.setInt(1, id);
+            //inicializamo el result set y ejecutamos la consulta
+            ResultSet rs;
+            rs = prepared.executeQuery();
+
+            //Cargamos los datos del result set al objeto cita
+            while (rs.next()) {
+
+                cita.setId(rs.getInt("id"));
+                cita.setDosis(rs.getInt("dosis"));
+                cita.setFecha_cita(new SimpleDateFormat("yyyy-MM-dd").parse(rs.getString("fecha_cita")));// debo convertir dado que parece que en sqlite la celda date son text
+                cita.setVacunatorio(rs.getString("vacunatorio"));
+                cita.setId_paciente(rs.getInt("id_paciente"));
+                cita.setNombre(rs.getString("nombre"));
+                cita.setApellido(rs.getString("apellido"));
+                cita.setId_vacunatorio(rs.getInt("id_vacunatorio"));
             }
             
             //Cerramos la conexión a la base de datos y devolvemos el objeto
@@ -448,7 +503,25 @@ public class ControllerCitas {
         }
     }
 
+    public static void CitaUpdate(int id){
+            String sql = "UPDATE cita SET estado = 1 "
+                + "WHERE id = ?";
+        try {
+            Connection conn;
+            conn = connect();
+            PreparedStatement pstmt = conn.prepareStatement(sql);          
+
+            pstmt.setInt(1, id);
+
+            pstmt.executeUpdate();
+            System.out.println("Paciente actualizado Ok");
+            conn.close();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     
+    }
     //Método para acordar un turno
     public static void CitaInsert(Cita c) {
         System.out.println("in controlle"+c.getVacunatorio());
