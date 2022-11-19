@@ -107,6 +107,7 @@ public class ControllerCitas {
                 cita.setNombre(rs.getString("nombre"));
                 cita.setApellido(rs.getString("apellido"));
                 cita.setId_vacunatorio(rs.getInt("id_vacunatorio"));
+                cita.setEstado(rs.getBoolean("estado"));
             }
             
             //Cerramos la conexión a la base de datos y devolvemos el objeto

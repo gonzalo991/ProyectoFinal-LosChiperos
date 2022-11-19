@@ -46,6 +46,7 @@ public class findPacientes extends javax.swing.JPanel {
     }    
   };
     
+   
     
     public findPacientes() {//constructor
         initComponents();
@@ -461,6 +462,8 @@ public class findPacientes extends javax.swing.JPanel {
         buscarPaciente();        
     }//GEN-LAST:event_btnBuscarActionPerformed
 
+    
+    
     private void buscarPaciente(){ // busca Paciente por número de DNI
     String DNI = textDNI.getText();        
         try {
@@ -638,7 +641,9 @@ public class findPacientes extends javax.swing.JPanel {
         panelCita.setVisible(true);
         labelFecha_cita.setText(new SimpleDateFormat("yyyy-MM-dd", Locale.US).format(c.getFecha_cita())); 
         labelDosis.setText(c.getDosis() + " dosis");
-        labelVacunatorio.setText(c.getVacunatorio());        
+        labelVacunatorio.setText(c.getVacunatorio()); 
+        panelCita.setVisible(true);
+        
     }   
 
     private void editarDosis(Aplicacion a){ // llama a la ventana editar dosis
@@ -667,11 +672,14 @@ public class findPacientes extends javax.swing.JPanel {
             System.out.println(e);
         }
         
-        if (this.c.getFecha_cita() !=  null) {
+        if (this.c.getFecha_cita() !=  null && !c.isEstado() ) {
+            //System.out.println(c.isEstado());
+                    
             llenarPanelDosis(this.c);
         }else{
             labelNoTurno.setVisible(true);
             System.out.println("no cita");
+            panelCita.setVisible(false);
         }
                
     }
