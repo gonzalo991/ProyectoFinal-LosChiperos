@@ -38,6 +38,14 @@
             <Property name="text" type="java.lang.String" value="Pacientes"/>
           </Properties>
           <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="findPaciente">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Buscar Paciente"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="findPacienteActionPerformed"/>
+              </Events>
+            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="viewPacientes">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Ver Pacientes"/>
@@ -45,14 +53,6 @@
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="viewPacientesMouseClicked"/>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="viewPacientesActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="findPaciente">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Buscar Paciente"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="findPacienteActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
@@ -69,11 +69,6 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="citaByDateActionPerformed"/>
               </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Turno del Paciente"/>
-              </Properties>
             </MenuItem>
           </SubComponents>
         </Menu>

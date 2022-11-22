@@ -53,11 +53,10 @@ public class Principal extends javax.swing.JFrame {
         MenuUser = new javax.swing.JMenu();
         CerrarSesion = new javax.swing.JMenuItem();
         btnPacientes = new javax.swing.JMenu();
-        viewPacientes = new javax.swing.JMenuItem();
         findPaciente = new javax.swing.JMenuItem();
+        viewPacientes = new javax.swing.JMenuItem();
         Turnos = new javax.swing.JMenu();
         citaByDate = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -150,6 +149,14 @@ public class Principal extends javax.swing.JFrame {
 
         btnPacientes.setText("Pacientes");
 
+        findPaciente.setText("Buscar Paciente");
+        findPaciente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                findPacienteActionPerformed(evt);
+            }
+        });
+        btnPacientes.add(findPaciente);
+
         viewPacientes.setText("Ver Pacientes");
         viewPacientes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -163,14 +170,6 @@ public class Principal extends javax.swing.JFrame {
         });
         btnPacientes.add(viewPacientes);
 
-        findPaciente.setText("Buscar Paciente");
-        findPaciente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                findPacienteActionPerformed(evt);
-            }
-        });
-        btnPacientes.add(findPaciente);
-
         menu.add(btnPacientes);
 
         Turnos.setText("Turnos");
@@ -182,9 +181,6 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         Turnos.add(citaByDate);
-
-        jMenuItem2.setText("Turno del Paciente");
-        Turnos.add(jMenuItem2);
 
         menu.add(Turnos);
 
@@ -283,7 +279,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu btnPacientes;
     private javax.swing.JMenuItem citaByDate;
     private javax.swing.JMenuItem findPaciente;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private java.awt.Label label2;
     private java.awt.Label labelVacunatorio;
