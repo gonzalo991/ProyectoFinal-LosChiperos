@@ -51,7 +51,7 @@ public class Principal extends javax.swing.JFrame {
         labelVacunatorio = new java.awt.Label();
         menu = new javax.swing.JMenuBar();
         MenuUser = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        CerrarSesion = new javax.swing.JMenuItem();
         btnPacientes = new javax.swing.JMenu();
         viewPacientes = new javax.swing.JMenuItem();
         findPaciente = new javax.swing.JMenuItem();
@@ -134,9 +134,19 @@ public class Principal extends javax.swing.JFrame {
         menu.setForeground(new java.awt.Color(0, 0, 0));
 
         MenuUser.setText("jMenu1");
+        MenuUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuUserActionPerformed(evt);
+            }
+        });
 
-        jMenuItem3.setText("Cerrar Sesión");
-        MenuUser.add(jMenuItem3);
+        CerrarSesion.setText("Cerrar Sesión");
+        CerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CerrarSesionActionPerformed(evt);
+            }
+        });
+        MenuUser.add(CerrarSesion);
 
         menu.add(MenuUser);
 
@@ -242,6 +252,20 @@ public class Principal extends javax.swing.JFrame {
         ShowPanel(t);
           
     }//GEN-LAST:event_citaByDateActionPerformed
+
+    private void CerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CerrarSesionActionPerformed
+        // TODO add your handling code here:
+        this.Usuario = null;
+       login l =  new login();
+       l.setLocationRelativeTo(null);
+       l.setVisible(true);
+       this.dispose();
+        
+    }//GEN-LAST:event_CerrarSesionActionPerformed
+
+    private void MenuUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuUserActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MenuUserActionPerformed
     
     private void ShowPanel(JPanel p){
         p.setSize(1200,600);
@@ -261,6 +285,7 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu Aplicaciones;
+    private javax.swing.JMenuItem CerrarSesion;
     private javax.swing.JMenu MenuUser;
     private javax.swing.JPanel PanelContenedor;
     private javax.swing.JPanel PanelDataUser;
@@ -270,7 +295,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem findPaciente;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
     private java.awt.Label label2;
     private java.awt.Label labelVacunatorio;

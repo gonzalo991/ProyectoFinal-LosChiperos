@@ -6,38 +6,42 @@
 package GUI.SubFrame.findPaciente;
 
 
+import static Persistencia.ControllerCentro.AllCentros;
 import static Persistencia.ControllerCitas.CitaUpdate;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.List;
+import model.Centro;
+
 import model.Cita;
 
 
 
-/**
- *
- * @author Cristian
- */
 public class editTurno extends javax.swing.JFrame {
 
     Cita cita;
-    public editTurno(Cita cita) {
+    findPacientes findPacientes;
+    public editTurno(Cita cita, findPacientes findPacientes) {
         initComponents();
         this.cita = cita;
+        this.findPacientes = findPacientes;
+        initComboBox();
         setDataFormulario();       
     }
     
-    public void dateLabel(){
-        String textDate_ = new SimpleDateFormat("yyyy-MM-dd", Locale.US).format(new Date());
-        textFechaCita.setText(textDate_);
+    private void initComboBox(){
+        List<Centro> centros = AllCentros();   
+        comboCentros.removeAllItems();        
+        for (Centro c : centros) {
+            comboCentros.addItem(c.getVacunatorio());
+        }
     }
+//    public void dateLabel(){
+//        String textDate_ = new SimpleDateFormat("yyyy-MM-dd", Locale.US).format(new Date());
+//        textFechaCita.setText(textDate_);
+//    }
     
     private void setDataFormulario(){
-        textFechaCita.setText(new SimpleDateFormat("yyyy-MM-dd", Locale.US).format(this.cita.getFecha_cita()));
-        textVacunatorio.setText(this.cita.getVacunatorio());
+        textFechaCita.setDate(this.cita.getFecha_cita());
+        comboCentros.setSelectedIndex(this.cita.getId_vacunatorio()-1);
         textDosis.setText(Integer.toString(this.cita.getDosis()));
     }
     
@@ -52,18 +56,24 @@ public class editTurno extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        textFechaCita = new javax.swing.JTextField();
-        textVacunatorio = new javax.swing.JTextField();
         textDosis = new javax.swing.JTextField();
         btnModificar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        textFechaCita = new com.toedter.calendar.JDateChooser();
+        comboCentros = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        textDosis.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                textDosisKeyPressed(evt);
+            }
+        });
 
         btnModificar.setText("Modificar");
         btnModificar.addActionListener(new java.awt.event.ActionListener() {
@@ -89,50 +99,53 @@ public class editTurno extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Editar Turno");
 
+        textFechaCita.setBackground(new java.awt.Color(255, 255, 255));
+        textFechaCita.setForeground(new java.awt.Color(0, 0, 0));
+        textFechaCita.setDateFormatString("yyyy-MM-dd");
+
+        comboCentros.setBackground(new java.awt.Color(255, 255, 255));
+        comboCentros.setForeground(new java.awt.Color(0, 0, 0));
+        comboCentros.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(99, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(94, 94, 94)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(94, 94, 94))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3))
-                                .addGap(39, 39, 39)))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(textVacunatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(textDosis, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(textFechaCita, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnModificar, javax.swing.GroupLayout.Alignment.TRAILING))))
-                .addGap(131, 131, 131))
+                            .addComponent(textDosis, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnModificar, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(textFechaCita, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel3)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(87, 87, 87)
+                        .addComponent(comboCentros, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addComponent(jLabel5)
-                .addGap(33, 33, 33)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textFechaCita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                .addGap(27, 27, 27)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addComponent(textFechaCita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textVacunatorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel2)
+                    .addComponent(comboCentros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textDosis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addComponent(btnModificar)
                 .addGap(36, 36, 36))
         );
@@ -157,16 +170,23 @@ public class editTurno extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-        try {
-            this.cita.setFecha_cita(new SimpleDateFormat("yyyy-MM-dd").parse(textFechaCita.getText()));
-        } catch (ParseException ex) {
-            Logger.getLogger(editTurno.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        this.cita.setVacunatorio(textVacunatorio.getText());              
+        this.cita.setFecha_cita(textFechaCita.getDate());
+        this.cita.setVacunatorio(comboCentros.getSelectedItem().toString());              
         this.cita.setDosis(Integer.parseInt(textDosis.getText()));
-        CitaUpdate(this.cita);       
+        this.cita.setId_vacunatorio(comboCentros.getSelectedIndex()+1);
+        CitaUpdate(this.cita);   
+        this.findPacientes.buscarPaciente();
         this.dispose();    
     }//GEN-LAST:event_btnModificarActionPerformed
+
+    private void textDosisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textDosisKeyPressed
+            char c = evt.getKeyChar();
+        if (!Character.isLetter(c)) {
+            textDosis.setEditable(true);
+        }else{
+            textDosis.setEditable(false);
+        }
+    }//GEN-LAST:event_textDosisKeyPressed
 
     
     /**
@@ -176,14 +196,14 @@ public class editTurno extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnModificar;
+    private javax.swing.JComboBox<String> comboCentros;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField textDosis;
-    private javax.swing.JTextField textFechaCita;
-    private javax.swing.JTextField textVacunatorio;
+    private com.toedter.calendar.JDateChooser textFechaCita;
     // End of variables declaration//GEN-END:variables
 
  

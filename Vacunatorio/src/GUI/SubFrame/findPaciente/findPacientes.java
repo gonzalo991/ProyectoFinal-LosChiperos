@@ -464,7 +464,7 @@ public class findPacientes extends javax.swing.JPanel {
 
     
     
-    private void buscarPaciente(){ // busca Paciente por número de DNI
+    public void buscarPaciente(){ // busca Paciente por número de DNI
     String DNI = textDNI.getText();        
         try {
             p = PacientesByDNI(DNI);//obtengo paciente
@@ -507,13 +507,14 @@ public class findPacientes extends javax.swing.JPanel {
 				JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
 	       if (input == 0) {// 0=yes, 1=no, 2=cancel
             PacienteDelete(this.p.getDni());
+            this.buscarPaciente();
         }
 	
 	System.out.println(input);
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void bntEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntEditActionPerformed
-      editPaciente modPaciente = new editPaciente(this.p);
+      editPaciente modPaciente = new editPaciente(this.p, this);
       modPaciente.setVisible(true);
     }//GEN-LAST:event_bntEditActionPerformed
     
@@ -648,7 +649,7 @@ public class findPacientes extends javax.swing.JPanel {
 
     private void editarDosis(Aplicacion a){ // llama a la ventana editar dosis
 
-      editDosis modDosis = new editDosis(a);
+      editDosis modDosis = new editDosis(a, this);
       modDosis.setVisible(true);
               
     }
@@ -660,6 +661,7 @@ public class findPacientes extends javax.swing.JPanel {
 	JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
 	if (input == 0) { // 0=yes, 1=no, 2=cancel
             AplicacionDeleteById(idDosis);
+            this.buscarPaciente();
         }	
     }
     
@@ -685,7 +687,7 @@ public class findPacientes extends javax.swing.JPanel {
     }
     
     private void editarTurno(Cita c){
-        editTurno modCita = new editTurno(c);
+        editTurno modCita = new editTurno(c, this);
         modCita.setVisible(true);
     }
     
@@ -696,6 +698,7 @@ public class findPacientes extends javax.swing.JPanel {
 	JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
 	if (input == 0) { // 0=yes, 1=no, 2=cancel
             CitaDeleteByPaciente(idTurno);
+            this.buscarPaciente();
         }
     }
     
