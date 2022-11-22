@@ -24,21 +24,35 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import model.Centro;
 import model.Cita;
+import model.User;
 
 
 public class AllTurnos extends javax.swing.JPanel {
     DefaultTableModel tablaDeTurnos = new DefaultTableModel();
     List<Cita> listarTurnos = new ArrayList<Cita>();
+    User ususario;
     
-    public AllTurnos() throws SQLException, ParseException {
+    public AllTurnos(User usuario) throws SQLException, ParseException {
         initComponents();
+        this.ususario = usuario;
         setModelo();
         listarTurnos = getCitas("2022-12-16",true);
-        LlenarLista(listarTurnos);
-       
+        LlenarLista(listarTurnos);       
         inicializarDatePicker(DateTurno);
         initComboBox();
+        administradorEnable();
     }
+    
+    private void administradorEnable(){
+    
+        if(this.ususario.getPermisos().equals("administrador")){
+            btnNewTurno.setEnabled(true);
+        }else{
+            btnNewTurno.setEnabled(false);
+        }
+    
+    } 
+    
     private void inicializarDatePicker(JDateChooser datepicker){
         Date date = new Date();
         Calendar calendar = Calendar.getInstance();
@@ -77,8 +91,9 @@ public class AllTurnos extends javax.swing.JPanel {
         TablaTurnos.setDefaultRenderer(Object.class, new Render());
             //listarTurnos = getCitas("2022-12-16",true);
            JButton btn1 = new JButton("Cumplir");
+           
             btn1.setName("cumplir");
-            
+            btn1.setEnabled(this.ususario.getPermisos().equals("administrador"));
             for (Cita c : listarTurnos) {
                 Registro[0] = c.getId();
                 Registro[1] = c.getId_paciente();

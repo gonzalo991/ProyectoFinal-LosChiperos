@@ -10,15 +10,18 @@ import java.util.List;
 import java.util.Locale;
 import javax.swing.table.DefaultTableModel;
 import model.Paciente;
+import model.User;
 
 public class AllPacientes extends javax.swing.JPanel {
     DefaultTableModel tablaDePacientes = new DefaultTableModel();
     List<Paciente> listarPacientes = new ArrayList<Paciente>();
-    
-    public AllPacientes() throws SQLException, ParseException {
+    User usuario;
+    public AllPacientes(User usuario) throws SQLException, ParseException {
         initComponents();
+        this.usuario = usuario;
         setModelo();
         LlenarLista();
+        administradorEnable();
     }
     
     private void setModelo(){
@@ -45,10 +48,18 @@ public class AllPacientes extends javax.swing.JPanel {
             }
               TablaPacientes.setModel(tablaDePacientes);                   
             
-            
-      
-        
     }
+    
+    private void administradorEnable(){
+    
+        if (usuario.getPermisos().equals("administrador")){
+            btnNewPaciente.setEnabled(true);
+        }else {
+            btnNewPaciente.setEnabled(false);
+        }
+    
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

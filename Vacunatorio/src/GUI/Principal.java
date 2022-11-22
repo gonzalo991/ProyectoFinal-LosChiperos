@@ -211,10 +211,10 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_viewPacientesMouseClicked
 
     private void viewPacientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewPacientesActionPerformed
-        System.out.println("AllPacientes");
+        //System.out.println("AllPacientes");
         AllPacientes p = null;
         try {
-            p = new AllPacientes();
+            p = new AllPacientes(this.Usuario);
         } catch (SQLException ex) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {
@@ -226,7 +226,7 @@ public class Principal extends javax.swing.JFrame {
     private void findPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_findPacienteActionPerformed
         
          findPacientes f = null;
-         f = new findPacientes();
+         f = new findPacientes(this.Usuario);
         
         ShowPanel(f);
     }//GEN-LAST:event_findPacienteActionPerformed
@@ -234,7 +234,7 @@ public class Principal extends javax.swing.JFrame {
     private void citaByDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_citaByDateActionPerformed
         AllTurnos t = null;
         try {
-            t = new AllTurnos();
+            t = new AllTurnos(this.Usuario);
         } catch (SQLException ex) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {

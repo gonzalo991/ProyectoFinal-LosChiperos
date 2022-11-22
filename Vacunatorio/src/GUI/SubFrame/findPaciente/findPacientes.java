@@ -31,6 +31,7 @@ import javax.swing.table.DefaultTableModel;
 import model.Aplicacion;
 import model.Cita;
 import model.Paciente;
+import model.User;
 
 /**
  *
@@ -38,7 +39,8 @@ import model.Paciente;
  */
 public class findPacientes extends javax.swing.JPanel {
     Paciente p = null;
-    Cita c = null;    
+    Cita c = null; 
+    User usuario = null;
     DefaultTableModel tablaDosisModel = new DefaultTableModel(){    
         @Override
         public boolean isCellEditable(int row, int column) {
@@ -49,9 +51,11 @@ public class findPacientes extends javax.swing.JPanel {
     
    
     
-    public findPacientes() {//constructor
+    public findPacientes(User usuario) {//constructor
         initComponents();
-        ComponentesNovisibles();        
+        this.usuario = usuario;
+        ComponentesNovisibles();  
+        administradorEnable();
     }
     
     private void ComponentesNovisibles(){//Inicializo paneles como no visibles - luego se habilitan si existen los datos
@@ -62,7 +66,24 @@ public class findPacientes extends javax.swing.JPanel {
         panelCita.setVisible(false);        
     }
     
-
+    private void administradorEnable(){
+        if(usuario.getPermisos().equals("administrador")){
+            btnDelete.setEnabled(true);
+            bntEdit.setEnabled(true);
+            newDosis.setEnabled(true); 
+            btnDeleteTurno.setEnabled(true);
+            btnDeleteTurno.setEnabled(true);
+            
+        }else {
+            btnDelete.setEnabled(false);
+            bntEdit.setEnabled(false);
+            newDosis.setEnabled(false); 
+            btnDeleteTurno.setEnabled(false);
+            btnDeleteTurno.setEnabled(false);
+        
+        }
+    
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -661,7 +682,9 @@ public class findPacientes extends javax.swing.JPanel {
         
         JButton btn1 = new JButton("Modificar");
         btn1.setName("m");
+        btn1.setEnabled(usuario.getPermisos().equals("administrador"));
         JButton btn2 = new JButton("Eliminar");
+        btn2.setEnabled(usuario.getPermisos().equals("administrador"));
         btn2.setName("e");
         //btn2.setIcon(defaultIcon);
          setModelo();
