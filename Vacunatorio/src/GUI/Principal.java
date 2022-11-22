@@ -58,8 +58,6 @@ public class Principal extends javax.swing.JFrame {
         Turnos = new javax.swing.JMenu();
         citaByDate = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
-        Aplicaciones = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -190,13 +188,6 @@ public class Principal extends javax.swing.JFrame {
 
         menu.add(Turnos);
 
-        Aplicaciones.setText("Aplicaciones");
-
-        jMenuItem1.setText("Registar Aplicacion");
-        Aplicaciones.add(jMenuItem1);
-
-        menu.add(Aplicaciones);
-
         setJMenuBar(menu);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -284,7 +275,6 @@ public class Principal extends javax.swing.JFrame {
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu Aplicaciones;
     private javax.swing.JMenuItem CerrarSesion;
     private javax.swing.JMenu MenuUser;
     private javax.swing.JPanel PanelContenedor;
@@ -293,7 +283,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu btnPacientes;
     private javax.swing.JMenuItem citaByDate;
     private javax.swing.JMenuItem findPaciente;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private java.awt.Label label2;

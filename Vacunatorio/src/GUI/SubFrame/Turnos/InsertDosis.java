@@ -15,12 +15,14 @@ import java.util.List;
 import model.Aplicacion;
 import model.Centro;
 import model.Cita;
+import model.Paciente;
 
 
 public class InsertDosis extends javax.swing.JFrame {
 
     Aplicacion aplicacion = new Aplicacion();
     Cita cita;
+    Paciente paciente;
     
     public InsertDosis(Cita cita) {
         initComponents();
@@ -28,8 +30,15 @@ public class InsertDosis extends javax.swing.JFrame {
         initComboBox();
         setDataFormulario();
         LabelNombre.setText(cita.getNombre());
-        LabelApellido.setText(cita.getApellido());
-      
+        LabelApellido.setText(cita.getApellido());      
+    }
+    
+    public InsertDosis(Paciente paciente){
+        initComponents();
+        initComboBox();
+        this.paciente = paciente;
+        LabelNombre.setText(paciente.getNombre());
+        LabelApellido.setText(paciente.getApellido());
     }
 
     private void setDataFormulario(){
