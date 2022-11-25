@@ -2,12 +2,9 @@
 package vacunatorio;
 
 import GUI.login;
-import Mail.Mail;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.List;
-import model.Cita;
+
 
 
 public class Vacunatorio {
@@ -17,13 +14,6 @@ public class Vacunatorio {
         login lg = new login();
         lg.setLocationRelativeTo(null);
         lg.show();
-//        String asunto ="Turno agendado";
-//        String cuerpo ="el dia tiene un turno en para darse la dosis";
-//        String email ="catastones@gmail.com";
-//        
-//        Mail.enviarMail(asunto, cuerpo, email);
-        
-       
     }
             
     

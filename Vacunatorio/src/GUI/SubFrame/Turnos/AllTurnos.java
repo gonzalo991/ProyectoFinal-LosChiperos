@@ -31,12 +31,17 @@ public class AllTurnos extends javax.swing.JPanel {
     DefaultTableModel tablaDeTurnos = new DefaultTableModel();
     List<Cita> listarTurnos = new ArrayList<Cita>();
     User ususario;
+    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+    
     
     public AllTurnos(User usuario) throws SQLException, ParseException {
         initComponents();
         this.ususario = usuario;
         setModelo();
-        listarTurnos = getCitas("2022-12-16",true);
+        Date date1 = new Date();
+        String diaActual;
+        diaActual = formatter.format(date1);
+        listarTurnos = getCitas(diaActual,false);
         LlenarLista(listarTurnos);       
         inicializarDatePicker(DateTurno);
         initComboBox();

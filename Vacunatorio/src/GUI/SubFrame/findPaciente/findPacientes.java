@@ -22,9 +22,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javax.swing.JButton;
-
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -629,8 +627,7 @@ public class findPacientes extends javax.swing.JPanel {
                     eliminarDosis(idDosis);
                 }
             }
-        }
-       
+        }       
     }//GEN-LAST:event_tablaDosisMouseClicked
 
     private void btnDeleteTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteTurnoActionPerformed
@@ -651,7 +648,7 @@ public class findPacientes extends javax.swing.JPanel {
     
     private void findDosis(Paciente p){//Busca las dosis del paciente y llama a las funcion que llena la tabla con las dosis
         List<Aplicacion> ListA = new ArrayList<Aplicacion>();
-        
+         panelDosisTurno.setVisible(true);
         try {
             ListA = AplicacionByDNI(p.getDni());
         } catch (Exception e) {
@@ -659,7 +656,7 @@ public class findPacientes extends javax.swing.JPanel {
         if (ListA.size() > 0) {
             //llenarListaDosis(ListA);
             ver_tabla(tablaDosis,ListA);
-            panelDosisTurno.setVisible(true);
+           
             labelNoDosis.setVisible(false);                    
         }
         else{ // si no hay dosis se muestra el label
