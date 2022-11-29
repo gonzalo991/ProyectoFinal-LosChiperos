@@ -211,22 +211,16 @@ public class newTurno extends javax.swing.JFrame {
             c.setFecha_cita(textFechaTurno.getDate());
             c.setId_vacunatorio(ComboCentros.getSelectedIndex()+1);
             c.setVacunatorio( String.valueOf(ComboCentros.getSelectedItem()));
+            c.setNombre(p.getNombre());
+            c.setApellido(p.getApellido());
             c.setEstado(false);
             
             CitaInsert(c);
             SetMail(c,p);
         } else {
             System.out.println("no no se pudo insertar cita");
-        }
-        
-//        try {
-//            this.cita.setFecha_cita(new SimpleDateFormat("yyyy-MM-dd").parse(textFechaCita.getText()));
-//        } catch (ParseException ex) {
-//            Logger.getLogger(newTurno.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        //this.cita.setVacunatorio(textVacunatorio.getText());
-//        this.cita.setDosis(Integer.parseInt(textDosis.getText()));
-//        CitaUpdate(this.cita);
+        }        
+
         this.dispose();
     }//GEN-LAST:event_btnModificarActionPerformed
 
@@ -234,7 +228,7 @@ public class newTurno extends javax.swing.JFrame {
         Centro centro = GetCentro(c.getId_vacunatorio());
         String asunto = "Turno Generado - Vacunación COVID-19 - Chiperos";
         String cuerpo = p.getNombre() +" "+p.getApellido() + "\n"
-                        + "Se asignó un turno para el día " + c.getFecha_cita() + "\n"
+                        + "Se asignó un turno para el día " + new SimpleDateFormat("dd-MM-yyyy", Locale.US).format(c.getFecha_cita()) + "\n"
                         + "para aplicarse la dosis N° "+c.getDosis()+ "\n"
                         + "presentarse en el vacunatorio " + centro.getVacunatorio()+ "\n"
                         + "Domicilio "+ centro.getDomicilio() + " - "+ centro.getLocalidad() +"-" +centro.getProvincia() + "\n"

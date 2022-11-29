@@ -11,6 +11,7 @@ import static Persistencia.ControllerAplicacion.AplicacionByDNI;
 import static Persistencia.ControllerAplicacion.AplicacionByid;
 import static Persistencia.ControllerAplicacion.AplicacionDeleteById;
 import static Persistencia.ControllerCitas.CitaDeleteByPaciente;
+import static Persistencia.ControllerCitas.CitaDeleteByidCita;
 import static Persistencia.ControllerCitas.getCitaByDNI;
 import static Persistencia.ControllerPacientes.PacienteDelete;
 import static Persistencia.ControllerPacientes.PacientesByDNI;
@@ -99,6 +100,8 @@ public class findPacientes extends javax.swing.JPanel {
         btnDelete = new javax.swing.JButton();
         bntEdit = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        labelEmail = new javax.swing.JLabel();
         panelCita = new javax.swing.JPanel();
         labelVacunatorio = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -189,6 +192,16 @@ public class findPacientes extends javax.swing.JPanel {
         jLabel13.setForeground(new java.awt.Color(0, 0, 0));
         jLabel13.setText("Paciente");
 
+        jLabel7.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel7.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel7.setText("Email");
+
+        labelEmail.setBackground(new java.awt.Color(255, 255, 255));
+        labelEmail.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        labelEmail.setForeground(new java.awt.Color(0, 0, 0));
+        labelEmail.setText("email");
+
         javax.swing.GroupLayout panelDataPacienteLayout = new javax.swing.GroupLayout(panelDataPaciente);
         panelDataPaciente.setLayout(panelDataPacienteLayout);
         panelDataPacienteLayout.setHorizontalGroup(
@@ -196,6 +209,10 @@ public class findPacientes extends javax.swing.JPanel {
             .addGroup(panelDataPacienteLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelDataPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelDataPacienteLayout.createSequentialGroup()
+                        .addComponent(btnDelete)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(bntEdit))
                     .addGroup(panelDataPacienteLayout.createSequentialGroup()
                         .addGroup(panelDataPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelDataPacienteLayout.createSequentialGroup()
@@ -214,12 +231,12 @@ public class findPacientes extends javax.swing.JPanel {
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(labelFecha))
-                            .addComponent(jLabel13))
-                        .addGap(0, 61, Short.MAX_VALUE))
-                    .addGroup(panelDataPacienteLayout.createSequentialGroup()
-                        .addComponent(btnDelete)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(bntEdit)))
+                            .addComponent(jLabel13)
+                            .addGroup(panelDataPacienteLayout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(labelEmail)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         panelDataPacienteLayout.setVerticalGroup(
@@ -243,6 +260,10 @@ public class findPacientes extends javax.swing.JPanel {
                 .addGroup(panelDataPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(labelFecha))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelDataPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(labelEmail))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panelDataPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDelete)
@@ -402,7 +423,7 @@ public class findPacientes extends javax.swing.JPanel {
         panelDosisTurnoLayout.setHorizontalGroup(
             panelDosisTurnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDosisTurnoLayout.createSequentialGroup()
-                .addGap(0, 16, Short.MAX_VALUE)
+                .addGap(0, 32, Short.MAX_VALUE)
                 .addGroup(panelDosisTurnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labelNoDosis)
                     .addComponent(jLabel8))
@@ -524,11 +545,11 @@ public class findPacientes extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1200, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -571,6 +592,7 @@ public class findPacientes extends javax.swing.JPanel {
             labelApellido.setText(p.getApellido());
             labelDNI.setText(p.getDni());            
             labelFecha.setText(new SimpleDateFormat("yyyy-MM-dd", Locale.US).format(p.getFecha_nacimiento()));
+            labelEmail.setText(p.getEmail());
     }    
    
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
@@ -632,6 +654,7 @@ public class findPacientes extends javax.swing.JPanel {
 
     private void btnDeleteTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteTurnoActionPerformed
         eliminarTurno(this.c.getId());
+        
     }//GEN-LAST:event_btnDeleteTurnoActionPerformed
 
     private void bntEditTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntEditTurnoActionPerformed
@@ -778,7 +801,7 @@ public class findPacientes extends javax.swing.JPanel {
                     , "Eliminar Turno",
 	JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
 	if (input == 0) { // 0=yes, 1=no, 2=cancel
-            CitaDeleteByPaciente(idTurno);
+            CitaDeleteByidCita(idTurno);
             this.buscarPaciente();
         }
     }
@@ -801,6 +824,7 @@ public class findPacientes extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -809,6 +833,7 @@ public class findPacientes extends javax.swing.JPanel {
     private javax.swing.JLabel labelApellido;
     private javax.swing.JLabel labelDNI;
     private javax.swing.JLabel labelDosis;
+    private javax.swing.JLabel labelEmail;
     private javax.swing.JLabel labelFecha;
     private javax.swing.JLabel labelFecha_cita;
     private javax.swing.JLabel labelName;

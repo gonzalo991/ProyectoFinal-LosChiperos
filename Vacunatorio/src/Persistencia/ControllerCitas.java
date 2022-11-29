@@ -477,6 +477,23 @@ public class ControllerCitas {
         }
 
     }
+    public static void CitaDeleteByidCita(int id_cita) {
+        String sql = "DELETE FROM cita where id = ?";
+
+        try {
+            Connection conn;
+            conn = connect();
+            PreparedStatement prepared = conn.prepareStatement(sql);
+            prepared.setInt(1, id_cita);
+            prepared.executeUpdate();
+            System.out.println("Cita eliminada ok");
+            conn.close();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+    }
 
 //método para actualizar el día del turno
     public static void CitaUpdate(Cita c) {

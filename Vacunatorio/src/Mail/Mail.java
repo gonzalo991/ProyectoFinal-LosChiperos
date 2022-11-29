@@ -1,9 +1,6 @@
 
 package Mail;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.security.InvalidParameterException;
+
 import java.util.Properties;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -24,8 +21,8 @@ public class Mail {
         propiedad.put("mail.smtp.ssl.trust", "*");
         propiedad.setProperty("mail.smtp.starttls.enable", "true");
         propiedad.setProperty("mail.smtp.port", "25");
-         propiedad.setProperty("mail.smtp.user", correoEnvia);
-         propiedad.setProperty("mail.smtp.ssl.protocols", "TLSv1.2");        
+        propiedad.setProperty("mail.smtp.user", correoEnvia);
+        propiedad.setProperty("mail.smtp.ssl.protocols", "TLSv1.2");        
         propiedad.setProperty("mail.smtp.auth","true");
         
 
