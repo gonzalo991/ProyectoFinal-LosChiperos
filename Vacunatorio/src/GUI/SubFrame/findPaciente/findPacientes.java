@@ -423,7 +423,7 @@ public class findPacientes extends javax.swing.JPanel {
         panelDosisTurnoLayout.setHorizontalGroup(
             panelDosisTurnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDosisTurnoLayout.createSequentialGroup()
-                .addGap(0, 32, Short.MAX_VALUE)
+                .addGap(0, 35, Short.MAX_VALUE)
                 .addGroup(panelDosisTurnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labelNoDosis)
                     .addComponent(jLabel8))
@@ -476,7 +476,7 @@ public class findPacientes extends javax.swing.JPanel {
         labelNoPaciente.setForeground(new java.awt.Color(204, 0, 0));
         labelNoPaciente.setText("No se encontró Paciente con ese DNI");
 
-        textDNI.setText("12456789");
+        textDNI.setText("98999999");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
