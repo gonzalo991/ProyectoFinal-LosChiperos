@@ -70,7 +70,7 @@ public class ControllerPacientes {
                 p.setDni(rs.getString("dni"));
                 System.out.println(rs.getString("fecha_nacimiento"));
                 p.setFecha_nacimiento(new SimpleDateFormat("yyyy-MM-dd").parse(rs.getString("fecha_nacimiento")));// debo convertir dado que parece que en sqlite la celda date son text
-                 p.setEmail(rs.getString("email"));
+                p.setEmail(rs.getString("email"));
             }
             conn.close();
             return p;
@@ -101,7 +101,7 @@ public class ControllerPacientes {
         String sql = "UPDATE pacientes SET nombre = ? , "
                 + "apellido = ? ,"
                 + "dni = ? ,"
-                + "fecha_nacimiento = ? "
+                + "fecha_nacimiento = ? ,"
                 + "email = ? "
                 + "WHERE id = ?";
         try {
@@ -113,7 +113,7 @@ public class ControllerPacientes {
             pstmt.setString(3, p.getDni());
             DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
             pstmt.setString(4, df.format(p.getFecha_nacimiento()));
-             pstmt.setString(5, p.getEmail());
+            pstmt.setString(5, p.getEmail());
             pstmt.setInt(6, p.getId());
 
             pstmt.executeUpdate();
